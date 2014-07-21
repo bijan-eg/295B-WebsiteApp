@@ -1,0 +1,19 @@
+<h4>These packages have been reserved by you. If all the services are already added to the package you can publish them to the customers.</h4>
+
+<input type="submit" value="Assign Package to available Tour Guide">
+<table class="table table-striped">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Description</th>
+  </tr>
+  <tr ng-repeat="pkg in packages">
+    <td>{{pkg.id}}</td>
+    <td>{{pkg.package_name}}</td>
+    <td>{{pkg.start_date}}</td>
+    <td>{{pkg.end_date}}</td>
+    <td>{{pkg.description}}</td>
+  </tr>
+</table>

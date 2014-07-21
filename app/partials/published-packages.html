@@ -1,0 +1,19 @@
+<h4>These packages are already published and customers can view them. They are ready to be assigned to an available tour guide</h4>
+
+<input type="submit" value="Assign Package to available Tour Guide">
+<table class="table table-striped">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Description</th>
+  </tr>
+  <tr ng-repeat="pkg in packages">
+    <td>{{pkg.id}}</td>
+    <td>{{pkg.package_name}}</td>
+    <td>{{pkg.start_date}}</td>
+    <td>{{pkg.end_date}}</td>
+    <td>{{pkg.description}}</td>
+  </tr>
+</table>

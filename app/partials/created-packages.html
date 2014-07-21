@@ -1,0 +1,19 @@
+<h4>This is a list of packages created and ready for being reserved.</h4>
+<div class="spinner" ng-show="loading"></div>
+<table class="table table-striped">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Start Date</th>
+    <th>End Date</th>
+    <th>Description</th>
+  </tr>
+  <tr ng-repeat="pkg in packagesNew" >  
+		<td>{{pkg.id}}</td>
+		<td><a ng-href="#/created-packages/{{pkg.id}}">{{pkg.package_name}}</a></td>
+		<td><a>{{pkg.start_date}}</a></td>
+		<td><a>{{pkg.end_date}}</a></td>
+		<td><a>{{pkg.description}}</a></td>	  
+    <!--<td><a>{{pkg.id}}</a></td>-->
+  </tr>
+</table>

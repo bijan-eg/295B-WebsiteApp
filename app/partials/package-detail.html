@@ -1,0 +1,35 @@
+<div class="well tab-content">
+	<div class="tab-pane active" id="object-form">
+		<form class="form-horizontal">
+			<fieldset>
+				<div>
+					<label class="control-label">Package name:</label>
+					<label class="control-label">{{singlepackage.package_name}}</label>
+				</div>
+				<br>
+				<div>
+					<label class="control-label">Description:</label>
+					<label class="control-label">{{singlepackage.description}}</label>
+				</div>
+				<br>
+				<div>
+					<label class="control-label">Start Date:</label>
+					<label class="control-label">{{singlepackage.start_date}}</label>
+				</div>
+				<br>
+				<div>
+					<label class="control-label">End Date:</label>
+					<label class="control-label">{{singlepackage.end_date}}</label>
+				</div>
+				<br>
+				<div class="form-actions">
+					<button class="btn btn-primary" title="Make a POST request on the Package List resource to create a new package">Edit Package</button>				
+				
+					<button class="btn btn-primary" title="Make a POST request on the Package List resource to create a new package">Delete Package</button>
+				
+					<a href="#/created-packages/pkg-info/reserve"><button class="btn btn-primary" >Reserve Package</button></a>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</div>
