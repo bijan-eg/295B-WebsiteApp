@@ -9,6 +9,7 @@
   <title>Travel Agent's AngularJS App</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="app_icon.ico">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/css/main.css">
   <link rel="stylesheet" href="css/app.css"/>
@@ -28,9 +29,7 @@
 	<div class="masthead">
   		  <h3 class="text-muted"><a href="#/created-packages">Agent Portal</a>
 		  <div class="spinner" ng-show="loading"></div>
-		  <form class="single-button" action="#/new-package">
-			<input type="submit" value="Create Package">
-		  </form>
+		  <a href="#/new-package" class="topbtn"><button class="btn btn-primary" >Create Package</button></a>
 		  </h3>
 		  
 		  <ul class="nav nav-justified">

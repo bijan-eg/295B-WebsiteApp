@@ -8,16 +8,21 @@ angular.module('travelApp.controllers', [])
 
   }])
   .controller('CreatedPackagesController', ['$scope', 'packages',  function($scope, packages) {
-	  $scope.packagesNew = {};
 	  packages.list(function(packages) {
-		  $scope.packagesNew = packages["results"];
+		  $scope.packages = packages;
 	  });
   }])
-  .controller('ReservedPackagesController', ['$scope', function($scope) {
-  
+  .controller('ReservedPackagesController', ['$scope', 'packages', function($scope, packages) {
+		packages.list(function(packages) {
+		  $scope.packages = packages;
+	  });
+	  $scope.Apackage={};
+	  $scope.currentPackage={};
   }])
-  .controller('PublishedPackagesController', ['$scope', function($scope) {
-  
+  .controller('PublishedPackagesController', ['$scope', 'packages', function($scope, packages) {
+		packages.list(function(packages) {
+		  $scope.packages = packages;
+	  });
   }])
   .controller('PackageDetailController', ['$scope', '$routeParams', 'packages', function($scope, $routeParams, packages) {
 	packages.find($routeParams.pid, function(singlepackage) {

@@ -48,3 +48,11 @@ div.borderline{
 	padding-left: 10px;
 	padding-bottom: 10px;
 }
+
+a.topbtn{
+	float:right;
+}
+
+label.redz{
+	color: #cc181e
+}
