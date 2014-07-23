@@ -4,8 +4,10 @@
 
 angular.module('travelApp.controllers', [])
   
-  .controller('NewPackageController', ['$scope', function($scope) {
-
+  .controller('NewPackageController', ['$scope', '$http', function($scope, $http) {
+		
+		 $scope.formData = {};
+		 
   }])
   .controller('CreatedPackagesController', ['$scope', 'packages',  function($scope, packages) {
 	  packages.list(function(packages) {

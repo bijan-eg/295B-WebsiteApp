@@ -1,0 +1,43 @@
+<h4>Hotel search for package: {{singlepackage.package_name}}</h4>
+<form action="/agentapp/packages/" method="POST" enctype="multipart/form-data" class="form-horizontal">
+	<fieldset>
+		<div class="control-group ">
+			<label for="package_name" class="control-label">Going to:</label>
+			<div class="controls">
+				<label class="control-label">City:</label>
+				<input class="form-control" type="text">
+				<label >State:</label>
+				<input class="form-control" type="text">
+			</div>
+		</div>
+		<div class="control-group ">
+			<label for="start_date" class="control-label">Check in:</label>
+			<input id='datepicker1' class="form-control"  type="text">
+		</div>
+		<div class="control-group ">
+			<label for="end_date" class="control-label">Check out:</label>
+			<div class="controls">
+				<input id='datepicker2' class="form-control" name="end_date" type="text">
+			</div>
+		</div>
+		<br>
+		<div class="form-actions">
+			<button class="btn btn-primary" >Search</button>
+		</div>
+		<script type="text/javascript">
+			$(document).ready(
+			  /* This is the function that will get executed after the DOM is fully loaded */
+			  function () {
+				$( "#datepicker1" ).datepicker({
+				  changeMonth: true,//this option for allowing user to select month
+				  changeYear: true //this option for allowing user to select from year range
+				});
+				$( "#datepicker2" ).datepicker({
+				  changeMonth: true,//this option for allowing user to select month
+				  changeYear: true //this option for allowing user to select from year range
+				});
+			  }
+			);
+		</script>
+	</fieldset>
+</form>

@@ -1,9 +1,15 @@
-<h4>Reserve the selected package here</h4>
-
-<tr ng-repeat="pkg in packages" >
-    <td><a>{{pkg.id}}</a></td>
-    <td>{{pkg.package_name}}</td>
-    <td><a>{{pkg.start_date}}</a></td>
-    <td><a>{{pkg.end_date}}</a></td>
-    <td><a>{{pkg.description}}</a></td>
-  </tr>
+<h4>Reserve services for the selected package here.</h4>
+<div>
+	Packages name: <b>{{singlepackage.package_name}}</b>
+</div>
+<br>
+<br>
+<div>
+	<a ng-href="#/created-packages/reserve/{{singlepackage.id}}/hotel"><button class="btn btn-primary" >Find Hotels</button></a>
+	<input type="text">
+</div>
+<br>
+<br>
+<div>
+	<a href="#/"><button class="btn btn-primary" >Find Flights</button></a>
+</div>

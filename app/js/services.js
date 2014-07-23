@@ -21,4 +21,15 @@ angular.module('travelApp.services', [])
 		}
 	};
   })
+  .factory('JWTtoken', function($http){
+   return {
+		getToken: function (callback) {
+			$http({
+				method: 'POST',
+				url: 'http://mighty-lowlands-2957.herokuapp.com/api-token-auth/',
+				data: {"username":"bipul", "password":"cmpe295"}
+			}).success(callback);
+		}
+   };
+ })
   .value('version', '0.1');

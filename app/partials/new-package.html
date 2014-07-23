@@ -2,43 +2,79 @@
 <h4>The created package will be added to your "Created Packages" list which then can be Reserved.</h4>
 <div class="well tab-content">                        
 	<div class="tab-pane active" id="object-form">
-        <form action="/agentapp/packages/" method="POST" enctype="multipart/form-data" class="form-horizontal">
+        <form ng-submit="createPackageForm()" method="POST" enctype="multipart/form-data"  class="form-horizontal" >
 			<fieldset>
-				<div class="control-group ">
+				<div class="control-group" >
 					<label for="package_name" class="control-label">Package name:</label>
 					<div class="controls">
-						<input id="package_name" class="form-control" ng-model="package_name" type="text">
+						<input id="package_name" class="form-control" ng-model="formData.packagename" type="text">
 					</div>
+					
 				</div>
-				<div class="control-group ">
+				<div class="control-group">
 					<label for="description" class="control-label">Description:</label>
 					<div class="controls">
-						<input id="description" class="form-control" name="description" type="text">
+						<input id="description" class="form-control" name="description" type="text" ng-model="formData.packagedescription">
 					</div>
 				</div>
-				<div class="control-group ">
+				<div class="control-group" >
 					<label for="start_date" class="control-label">Start date:</label>
-						<input id='datepicker1' class="form-control"  type="text">
+					<input id='datepicker1' class="form-control"  type="text" ng-model="formData.startdate">
+					
 				</div>
-				<div class="control-group ">
+				<div class="control-group" >
 					<label for="end_date" class="control-label">End date:</label>
 					<div class="controls">
-						<input id='datepicker2' class="form-control" name="end_date" type="text">
+						<input id='datepicker2' class="form-control" name="end_date" type="text" ng-model="formData.enddate">
+					</div>
+					
+				</div>
+				<div class="form-group">
+					<label class="control-label">Package type:</label>
+					<div class="radio">
+						<label>
+							<input type="radio" name="pkgType" value="VC" ng-model="formData.pkgType" class="nfi">Vacation
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input type="radio" name="pkgType" value="HM" ng-model="formData.pkgType" class="nfi">Honeymoon
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input type="radio" name="pkgType" value="ED" ng-model="formData.pkgType" class="nfi">Educational
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input type="radio" name="pkgType" value="AD" ng-model="formData.pkgType" class="nfi">Adventure
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input type="radio" name="pkgType" value="FM" ng-model="formData.pkgType" class="nfi">Family
+						</label>
+					</div>
+					<div class="radio">
+						<label>
+							<input type="radio" name="pkgType" value="PL" ng-model="formData.pkgType" class="nfi">Pilgrimage
+						</label>
 					</div>
 				</div>
-				<div class="control-group ">
+				<!--<div class="control-group ">
 					<label for="package_type" class="control-label">Package type:</label>
 					<div class="controls">
 						<select id="package_type" name="package_type" class="form-control">
-							<option value="VC">Vacation</option>
-							<option value="HM">Honeymoon</option>
-							<option value="ED">Educational</option>
-							<option value="AD">Adventure</option>
-							<option value="FM">Family</option>
-							<option value="PL">Pilgrimage</option>
+							<option value="VC" ng-model="formData.pkgType">Vacation</option>
+							<option value="HM" ng-model="formData.pkgType">Honeymoon</option>
+							<option value="ED" ng-model="formData.pkgType">Educational</option>
+							<option value="AD" ng-model="formData.pkgType">Adventure</option>
+							<option value="FM" ng-model="formData.pkgType">Family</option>
+							<option value="PL" ng-model="formData.pkgType">Pilgrimage</option>
 						</select>
 					</div>
-				</div>
+				</div>-->
 				<br>
 				<h4>Which of these services are included in the package?</h4>
 				<div class="borderline">
@@ -75,7 +111,7 @@
 				</div>
 				<br>
 				<div class="form-actions">
-					<button class="btn btn-primary" ng-click="createPackage" title="Make a POST request on the Package List resource">Create Package</button>
+					<button class="btn btn-primary" type="submit">Create Package</button>
 				</div>
 				<script type="text/javascript">
 				  $(document).ready(
@@ -94,5 +130,8 @@
 				</script>
 			</fieldset>
 		</form>
+		<pre>
+		{{ formData }}
+	</pre>
 	</div>              
 </div>
