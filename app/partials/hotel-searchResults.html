@@ -1,0 +1,29 @@
+<div>
+	<strong><label for="submitDebugArea"> Submit result:</label></strong> <br />
+	<textarea id="submitDebugArea">{{hotelResults | json}} </textarea>
+	<br>
+	<h3>{{hotelResults.HotelListResponse.EanWsError.verboseMessage}}</h3>
+	<br>
+	<img src="http://media.expedia.com+{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].thumbNailUrl}}">
+	<img src="{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].tripAdvisorRatingUrl}}">
+	<br>
+	<h4>Hotel ID:</h4>
+	{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].hotelId}}
+	<br>
+	<h4>Hotel Rating:</h4>
+	{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].hotelRating}}
+	<br>
+	<h4>Hotel Name:</h4>
+	{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].name}}
+	<br>
+	<h4>Hotel Address:</h4>
+	{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].address1}}, {{hotelResults.HotelListResponse.HotelList.HotelSummary[1].city}}, {{hotelResults.HotelListResponse.HotelList.HotelSummary[1].stateProvinceCode}} {{hotelResults.HotelListResponse.HotelList.HotelSummary[1].postalCode}}
+	<br>
+	<h4>lat: </h4>{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].latitude}}
+	<br>
+	<h4>long: </h4>{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].longitude}}
+	<br>
+	<h4>Hotel TripAdvisor link: </h4>
+	<a href="{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].deepLink}}"</a>
+	<br>
+</div>

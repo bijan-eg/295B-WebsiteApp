@@ -2,30 +2,30 @@
 <h4>The created package will be added to your "Created Packages" list which then can be Reserved.</h4>
 <div class="well tab-content">                        
 	<div class="tab-pane active" id="object-form">
-        <form ng-submit="createPackageForm()" method="POST" enctype="multipart/form-data"  class="form-horizontal" >
+        <form enctype="multipart/form-data"  class="form-horizontal" name="packageForm" >
 			<fieldset>
 				<div class="control-group" >
 					<label for="package_name" class="control-label">Package name:</label>
 					<div class="controls">
-						<input id="package_name" class="form-control" ng-model="formData.packagename" type="text">
+						<input id="package_name" class="form-control" ng-model="package_name" type="text">
 					</div>
 					
 				</div>
 				<div class="control-group">
 					<label for="description" class="control-label">Description:</label>
 					<div class="controls">
-						<input id="description" class="form-control" name="description" type="text" ng-model="formData.packagedescription">
+						<input id="description" class="form-control" name="description" type="text" ng-model="description">
 					</div>
 				</div>
 				<div class="control-group" >
-					<label for="start_date" class="control-label">Start date:</label>
-					<input id='datepicker1' class="form-control"  type="text" ng-model="formData.startdate">
+					<label for="startDate" class="control-label">Start date:</label>
+					<input id='startDate' class="form-control"  type="text" ng-model="start_date">
 					
 				</div>
 				<div class="control-group" >
-					<label for="end_date" class="control-label">End date:</label>
+					<label for="endDate" class="control-label">End date:</label>
 					<div class="controls">
-						<input id='datepicker2' class="form-control" name="end_date" type="text" ng-model="formData.enddate">
+						<input id='endDate' class="form-control" name="endDate" type="text" ng-model="end_date">
 					</div>
 					
 				</div>
@@ -33,32 +33,32 @@
 					<label class="control-label">Package type:</label>
 					<div class="radio">
 						<label>
-							<input type="radio" name="pkgType" value="VC" ng-model="formData.pkgType" class="nfi">Vacation
+							<input type="radio" name="pkgType" value="VC" ng-model="package_type" class="nfi">Vacation
 						</label>
 					</div>
 					<div class="radio">
 						<label>
-							<input type="radio" name="pkgType" value="HM" ng-model="formData.pkgType" class="nfi">Honeymoon
+							<input type="radio" name="pkgType" value="HM" ng-model="package_type" class="nfi">Honeymoon
 						</label>
 					</div>
 					<div class="radio">
 						<label>
-							<input type="radio" name="pkgType" value="ED" ng-model="formData.pkgType" class="nfi">Educational
+							<input type="radio" name="pkgType" value="ED" ng-model="package_type" class="nfi">Educational
 						</label>
 					</div>
 					<div class="radio">
 						<label>
-							<input type="radio" name="pkgType" value="AD" ng-model="formData.pkgType" class="nfi">Adventure
+							<input type="radio" name="pkgType" value="AD" ng-model="package_type" class="nfi">Adventure
 						</label>
 					</div>
 					<div class="radio">
 						<label>
-							<input type="radio" name="pkgType" value="FM" ng-model="formData.pkgType" class="nfi">Family
+							<input type="radio" name="pkgType" value="FM" ng-model="package_type" class="nfi">Family
 						</label>
 					</div>
 					<div class="radio">
 						<label>
-							<input type="radio" name="pkgType" value="PL" ng-model="formData.pkgType" class="nfi">Pilgrimage
+							<input type="radio" name="pkgType" value="PL" ng-model="package_type" class="nfi">Pilgrimage
 						</label>
 					</div>
 				</div>
@@ -111,11 +111,17 @@
 				</div>
 				<br>
 				<div class="form-actions">
-					<button class="btn btn-primary" type="submit">Create Package</button>
+					<button ng-click="createPackage('submitResult')" 
+					ng-disabled="packageForm.$invalid" class="btn btn-primary" title="create a new package" >Create Package</button>
 				</div>
 				<script type="text/javascript">
-				  $(document).ready(
-				  /* This is the function that will get executed after the DOM is fully loaded */
+					$('#startDate, #endDate').datepicker({
+						numberOfMonths: 2,
+						dateFormat: 'mm-dd-yy'
+					});
+					/*
+					$(document).ready(
+				  // This is the function that will get executed after the DOM is fully loaded 
 				  function () {
 					$( "#datepicker1" ).datepicker({
 					  changeMonth: true,//this option for allowing user to select month
@@ -127,11 +133,13 @@
 					});
 				  }
 				);
+				*/
 				</script>
 			</fieldset>
 		</form>
-		<pre>
-		{{ formData }}
-	</pre>
 	</div>              
 </div>
+<br>
+{{$scope.package_name}}
+<strong><label for="submitDebugArea"> Submit result:</label></strong> <br />
+<textarea id="submitDebugArea">{{submitResult | json}} </textarea>

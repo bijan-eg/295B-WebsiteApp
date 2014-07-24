@@ -4,10 +4,35 @@
 
 angular.module('travelApp.controllers', [])
   
-  .controller('NewPackageController', ['$scope', '$http', function($scope, $http) {
-		
-		 $scope.formData = {};
-		 
+  .controller('NewPackageController', ['$scope','$http', 'JWTtoken', function($scope, $http, JWTtoken) {
+	JWTtoken.getToken(function(JWTtoken) {
+	$scope.myToken = JWTtoken["token"];	
+	});
+	$scope.createPackage = function(resultPackage) {
+		var payload = {
+		"package_name": $scope.package_name, 
+		"description": $scope.description, 
+		"start_date": $scope.start_date, 
+		"end_date": $scope.end_date, 
+		"package_type": $scope.package_type, 
+		"flight": "false", 
+		"hotel": "true", 
+		"insurance": "false", 
+		"restaurant": "false", 
+		"local_booking": "false", 
+		};	
+		 $http({ url:"http://mighty-lowlands-2957.herokuapp.com/agentapp/packages/",
+			method: "POST",
+			data:payload,
+			headers:{"Authorization":"JWT "+$scope.myToken}
+		})
+		.success(function(data, status, headers, config) {
+			$scope[resultPackage] = data;
+		})
+		.error(function(data, status, headers, config) {
+			$scope[resultPackage] = status; 
+		});
+	};		 
   }])
   .controller('CreatedPackagesController', ['$scope', 'packages',  function($scope, packages) {
 	  packages.list(function(packages) {
@@ -33,4 +58,22 @@ angular.module('travelApp.controllers', [])
   }])
   .controller('ReservePackageController', ['$scope', function($scope) {
   
+  }])
+  .controller('SearchHotelsController', ['$scope', '$http', 'hotels', function($scope, $http, hotels) {
+	hotels.search($scope.hotelCity, $scope.hotelState, $scope.hotelStartDate, $scope.hotelEndDate, function(hotels){
+		$scope.hotelResults = hotels;
+	});
+	/*$scope.searchHotel = function(hotelResults) {
+		$http({
+			method: 'GET',
+			url: 'http://mighty-lowlands-2957.herokuapp.com/agentapp/hotels/?city='+$scope.hotelCity+'&state='+$scope.hotelState+'&startDate='+$scope.hotelStartDate+'&endDate='+$scope.hotelEndDate,
+			cache: true
+		})
+		.success(function(data, status, headers, config) {
+			$scope[hotelResults] = data;
+		})
+		.error(function(data, status, headers, config) {
+			$scope[hotelResults] = status; 
+		});
+	}*/
   }])

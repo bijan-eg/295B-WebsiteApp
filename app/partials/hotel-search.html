@@ -1,28 +1,28 @@
-<h4>Hotel search for package: {{singlepackage.package_name}}</h4>
-<form action="/agentapp/packages/" method="POST" enctype="multipart/form-data" class="form-horizontal">
+<!--<h4>Hotel search for package: {{reservingpackage.package_name}}</h4>-->
+<form enctype="multipart/form-data" class="form-horizontal" name="hotelSearchForm">
 	<fieldset>
 		<div class="control-group ">
 			<label for="package_name" class="control-label">Going to:</label>
 			<div class="controls">
 				<label class="control-label">City:</label>
-				<input class="form-control" type="text">
+				<input class="form-control" type="text" ng-model="hotelCity">
 				<label >State:</label>
-				<input class="form-control" type="text">
+				<input class="form-control" type="text" ng-model="hotelState">
 			</div>
 		</div>
 		<div class="control-group ">
 			<label for="start_date" class="control-label">Check in:</label>
-			<input id='datepicker1' class="form-control"  type="text">
+			<input id='datepickera1' class="form-control"  type="text" ng-model="hotelStartDate">
 		</div>
 		<div class="control-group ">
 			<label for="end_date" class="control-label">Check out:</label>
 			<div class="controls">
-				<input id='datepicker2' class="form-control" name="end_date" type="text">
+				<input id='datepickera2' class="form-control" name="end_date" type="text" ng-model="hotelEndDate">
 			</div>
 		</div>
 		<br>
 		<div class="form-actions">
-			<button class="btn btn-primary" >Search</button>
+			<a ng-href="#/created-packages/reserve/hotelSearch/searchResults"><button class="btn btn-primary">Search</button></a>
 		</div>
 		<script type="text/javascript">
 			$(document).ready(

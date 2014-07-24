@@ -31,5 +31,16 @@ angular.module('travelApp.services', [])
 			}).success(callback);
 		}
    };
- })
+  })
+  .factory('hotels', function($http){
+	return{
+		search: function(city, state, startDate, endDate, callback){
+			$http({
+				method: 'GET',
+				url: 'http://mighty-lowlands-2957.herokuapp.com/agentapp/hotels/?city='+city+'&state='+state+'&startDate='+startDate+'&endDate='+endDate,
+				cache: true
+			}).success(callback);
+		}
+	};
+  })
   .value('version', '0.1');
