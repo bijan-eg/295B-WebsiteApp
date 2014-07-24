@@ -31,7 +31,7 @@ angular.module('travelApp.services', [])
 			}).success(callback);
 		}
    };
-  })
+  })/*
   .factory('hotels', function($http){
 	return{
 		search: function(city, state, startDate, endDate, callback){
@@ -42,5 +42,5 @@ angular.module('travelApp.services', [])
 			}).success(callback);
 		}
 	};
-  })
+  })*/
   .value('version', '0.1');

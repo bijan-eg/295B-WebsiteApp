@@ -1,9 +1,6 @@
 'use strict';
-
 /* Controllers */
-
 angular.module('travelApp.controllers', [])
-  
   .controller('NewPackageController', ['$scope','$http', 'JWTtoken', function($scope, $http, JWTtoken) {
 	JWTtoken.getToken(function(JWTtoken) {
 	$scope.myToken = JWTtoken["token"];	
@@ -51,18 +48,30 @@ angular.module('travelApp.controllers', [])
 		  $scope.packages = packages;
 	  });
   }])
-  .controller('PackageDetailController', ['$scope', '$routeParams', 'packages', function($scope, $routeParams, packages) {
+  .controller('PackageDetailController', ['$scope', '$routeParams', 'packages', '$http', function($scope, $routeParams, packages, $http) {
 	packages.find($routeParams.pid, function(singlepackage) {
-	$scope.singlepackage = singlepackage;
+		$scope.singlepackage = singlepackage;
 	});
+	$scope.searchHotel = function(hotelResults) {
+		$http({
+			method: 'GET',
+			url: 'http://mighty-lowlands-2957.herokuapp.com/agentapp/hotels/?city='+$scope.hotelCity+'&state='+$scope.hotelState+'&startDate='+$scope.hotelStartDate+'&endDate='+$scope.hotelEndDate,
+			cache: true
+		})
+		.success(function(data, status, headers, config) {
+			$scope[hotelResults] = data;
+		})
+		.error(function(data, status, headers, config) {
+			$scope[hotelResults] = status; 
+		});
+	}
+	//hotels.search($scope.hotelCity, $scope.hotelState, $scope.hotelStartDate, $scope.hotelEndDate, function(hotels){
+	//	$scope.hotelResults = hotels;
+	//});
   }])
-  .controller('ReservePackageController', ['$scope', function($scope) {
-  
+  .controller('ReservePackageController', ['$scope', function($scope) {  
   }])
-  .controller('SearchHotelsController', ['$scope', '$http', 'hotels', function($scope, $http, hotels) {
-	hotels.search($scope.hotelCity, $scope.hotelState, $scope.hotelStartDate, $scope.hotelEndDate, function(hotels){
-		$scope.hotelResults = hotels;
-	});
+  .controller('SearchHotelsController', ['$scope', function($scope  ) {	
 	/*$scope.searchHotel = function(hotelResults) {
 		$http({
 			method: 'GET',
