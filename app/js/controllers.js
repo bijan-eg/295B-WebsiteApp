@@ -48,9 +48,12 @@ angular.module('travelApp.controllers', [])
 		  $scope.packages = packages;
 	  });
   }])
-  .controller('PackageDetailController', ['$scope', '$routeParams', 'packages', '$http', function($scope, $routeParams, packages, $http) {
+  .controller('PackageDetailController', ['$scope', '$routeParams', 'packages', '$http', 'JWTtoken', function($scope, $routeParams, packages, $http, JWTtoken) {
 	packages.find($routeParams.pid, function(singlepackage) {
 		$scope.singlepackage = singlepackage;
+	});
+	JWTtoken.getToken(function(JWTtoken) {
+	$scope.myToken = JWTtoken["token"];	
 	});
 	$scope.searchHotel = function(hotelResults) {
 		$http({
@@ -64,6 +67,25 @@ angular.module('travelApp.controllers', [])
 		.error(function(data, status, headers, config) {
 			$scope[hotelResults] = status; 
 		});
+	}
+	$scope.removePackage = function(id, removingpackage) {
+		//var deletePackage = $window.confirm('Are you sure you want to delete this package?');
+		//if (deletePackage) {
+			//packages.remove($routeParams.pid, function(removedPackage){
+				//$scope.removedpackage = removedPackage;
+			//});
+			$http({ url:'http://mighty-lowlands-2957.herokuapp.com/agentapp/packages/'+id,
+			method: "DELETE",
+			headers:{"Authorization":"JWT "+$scope.myToken}
+			})
+			.success(function(data, status, headers, config) {
+				$scope[removingpackage] = data;
+			})
+			.error(function(data, status, headers, config) {
+				$scope[removingpackage] = status; 
+			});
+			//$window.alert('Package Deleted!');
+		//}
 	}
 	//hotels.search($scope.hotelCity, $scope.hotelState, $scope.hotelStartDate, $scope.hotelEndDate, function(hotels){
 	//	$scope.hotelResults = hotels;

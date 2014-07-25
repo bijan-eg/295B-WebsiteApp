@@ -19,6 +19,13 @@ angular.module('travelApp.services', [])
 				cache: true
 			}).success(callback);
 		}
+		//remove: function (id, callback){
+		//	$http({
+		//		method: 'DELETE',
+		//		url: 'http://mighty-lowlands-2957.herokuapp.com/agentapp/packages/'+id,
+		//		cache: true
+		//	}).success(callback);
+		//}
 	};
   })
   .factory('JWTtoken', function($http){
