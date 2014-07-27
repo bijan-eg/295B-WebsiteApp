@@ -1,64 +1,31 @@
-
-<form enctype="multipart/form-data" class="form-horizontal" name="hotelSearchForm">
+<form enctype="multipart/form-data" class="form-horizontal" name="hotelSearchForm" ng-submit="searchHotel(hotelResults)">
 	<fieldset>
 		<div class="control-group ">
 			<label for="package_name" class="control-label">Going to: {{singlepackage.package_name}}</label>
 			<div class="controls">
 				<label class="control-label">City:</label>
-				<input class="form-control" type="text" ng-model="hotelCity">
+				<input  class="form-control" type="text" ng-model="hotelCity">
 				<label >State:</label>
 				<input class="form-control" type="text" ng-model="hotelState">
 			</div>
 		</div>
-		<div class="control-group ">
-			<label for="start_date" class="control-label">Check in:</label>
-			<input id='datepick2' class="form-control"  type="text" ng-model="hotelStartDate" placeholder="mm/dd/yyyy">
+		<div class="controls ">
+			<label>Check in:</label>
+			<input  class="form-control"  type="text" ng-model="startDate" placeholder="mm/dd/yyyy">
 		</div>
 		<div class="control-group ">
 			<label for="end_date" class="control-label">Check out:</label>
 			<div class="controls">
-				<input id='datepick3' class="form-control" name="end_date" type="text" ng-model="hotelEndDate" placeholder="mm/dd/yyyy">
+				<input id='datepick3' class="form-control" type="text" ng-model="endDate" placeholder="mm/dd/yyyy">
 			</div>
 		</div>
 		<br>
 		<div class="form-actions">
-			<button class="btn btn-primary" ng-click="searchHotel('hotelResults')" 
-					ng-disabled="hotelSearchForm.$invalid">Search</button>
+			<!--<button class="btn btn-primary" ng-click="searchHotel('hotelResults')" 
+					ng-disabled="hotelSearchForm.$invalid">Search</button>-->
+			<a ng-href="#/created-packages/{{singlepackage.id}}/reserve/hotelSearch/{{hotelCity}}/{{hotelState}}/{{startDate}}/{{endDate}}/searchResults"><button class="btn btn-primary" >Search</button></a>
 		</div>	
-		<div>
-	<strong><label for="submitDebugArea"> Submit result:</label></strong> <br />
-	<textarea id="submitDebugArea">{{hotelResults | json}} </textarea>
-	<br>
-	<h3>{{hotelResults.HotelListResponse.EanWsError.verboseMessage}}</h3>
-	<br>
-	<img src="http://media.expedia.com{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].thumbNailUrl}}" width="250" height="250">
-	<img src="{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].tripAdvisorRatingUrl}}">
-	<br>
-	<h4>Hotel ID:</h4>
-	{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].hotelId}}
-	<br>
-	<h4>Hotel Rating:</h4>
-	{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].hotelRating}}
-	<br>
-	<h4>Hotel Name:</h4>
-	{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].name}}
-	<br>
-	<h4>Hotel Address:</h4>
-	{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].address1}}, {{hotelResults.HotelListResponse.HotelList.HotelSummary[1].city}}, {{hotelResults.HotelListResponse.HotelList.HotelSummary[1].stateProvinceCode}} {{hotelResults.HotelListResponse.HotelList.HotelSummary[1].postalCode}}
-	<br>
-	<h4>lat: </h4>{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].latitude}}
-	<br>
-	<h4>long: </h4>{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].longitude}}
-	<br>
-	<h4>Hotel TripAdvisor link: </h4>
-	<a href="{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].deepLink}}">TripAdvisor</a>
-	<br>
-</div>
 <br>
-		<span ng-bind="hotelCity"></span>
-		<span ng-bind="hotelState"></span>
-		<span ng-bind="hotelStartDate"></span>
-		<span ng-bind="hotelEndDate"></span>
 <!--			$(document).ready(
 			  /* This is the function that will get executed after the DOM is fully loaded *
 			  function () {
