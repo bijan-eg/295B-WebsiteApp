@@ -43,7 +43,8 @@ hotel-searchResults.html
 				 <br>
 				 chargeableRate: {{hotelResults.HotelListResponse.HotelList.HotelSummary[0].RoomRateDetailsList.RoomRateDetails.RateInfos.RateInfo.ChargeableRateInfo['@total']}}
 				 <br>
-				 book results: {{bookHotel}} 
+				 {{bookHotel}}
+				 book results: {{bookHotel.HotelRoomReservationResponse.EanWsError.verboseMessage}} 
 			</div>
 	</div>
 </div>

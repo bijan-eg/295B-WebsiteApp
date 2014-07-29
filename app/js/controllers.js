@@ -177,7 +177,7 @@ angular.module('travelApp.controllers', [])
 		"firstName": "test", //$scope.bookfirstName,
 		"lastName": "tester", //$scope.booklastName,
 		"city": "Seattle", //$scope.bookcity,
-		"stateProvineCode": "WA", //$scope.bookstateProvinceCode,
+		"stateProvinceCode": "WA", //$scope.bookstateProvinceCode,
 		"countryCode": "US", //$scope.bookcountryCode,
 		"postalCode": "98004", //$scope.bookpostalCode,
 		"packageId": "1" //$scope.singlepackage.id
@@ -192,7 +192,7 @@ angular.module('travelApp.controllers', [])
 			url:"http://mighty-lowlands-2957.herokuapp.com/agentapp/hotel-reservation/",
 			method: "POST",
 			data: payload,
-			headers:{"Authorization":"JWT "+$scope.myTokenH}
+			headers:{"Content-Type": "application/json", "Authorization":"JWT "+$scope.myTokenH}
 		})
 		.success(function(data, status, headers, config) {
 			$scope[bookHotel] = data;
