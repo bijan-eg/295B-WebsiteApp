@@ -21,6 +21,7 @@ angular.module('travelApp.services', [])
 		}
 	};
   })
+<<<<<<< HEAD
   
   .factory('JWTtoken', function($http){
    return {
@@ -59,3 +60,6 @@ angular.module('travelApp.services', [])
 		//show: funtion(callback){
 		
   .value('version', '0.1');
+=======
+  .value('version', '0.1');
+>>>>>>> parent of 2bf1df7... new package and reserve package ui

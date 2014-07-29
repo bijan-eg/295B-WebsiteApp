@@ -15,7 +15,7 @@
     <th>End Date</th>
     <th>Description</th>
   </tr>
-  <tr ng-repeat="pkg in packages | filter:searchText" >
+  <tr type="checkbox" ng-repeat="pkg in packages | filter:searchText" >
 		<td ng-if="pkg.status == 'reserved'"><input type="radio" ng-model="$parent.currentPackage" name="foo" value="{{pkg}}" id="{{pkg.id}}"></td>
 		<td ng-if="pkg.status == 'reserved'"><a ng-href="#/reserved-packages/{{pkg.id}}">{{pkg.id}}</a></td>
 		<td ng-if="pkg.status == 'reserved'"><a ng-href="#/reserved-packages/{{pkg.id}}">{{pkg.package_name}}</a></td>

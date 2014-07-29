@@ -1,6 +1,7 @@
 'use strict';
 /* Controllers */
 angular.module('travelApp.controllers', [])
+<<<<<<< HEAD
 
   .controller('NewPackageController', ['$scope','$http', 'JWTtoken', function($scope, $http, JWTtoken) {
 	JWTtoken.getToken(function(JWTtoken) {
@@ -31,6 +32,11 @@ angular.module('travelApp.controllers', [])
 			$scope[resultPackage] = status; 
 		});
 	};
+=======
+  
+  .controller('NewPackageController', ['$scope', function($scope) {
+
+>>>>>>> parent of 2bf1df7... new package and reserve package ui
   }])
   
   .controller('CreatedPackagesController', ['$scope', 'packages', function($scope, packages) {
