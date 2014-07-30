@@ -17,7 +17,7 @@
     <th>Description</th>
   </tr>
   <tr ng-repeat="pkg in packages | filter:searchText" >
-		<td ng-if="pkg.status == 'created'"><a ng-href="#/created-packages/{{pkg.id}}">{{pkg.id}}</td>
+		<td ng-if="pkg.status == 'created'"><a ng-href="#/created-packages/{{pkg.id}}">{{pkg.id}}</a></td>
 		<td ng-if="pkg.status == 'created'"><a ng-href="#/created-packages/{{pkg.id}}">{{pkg.package_name}}</a></td>
 		<td ng-if="pkg.status == 'created'"><a>{{pkg.start_date}}</a></td>
 		<td ng-if="pkg.status == 'created'"><a>{{pkg.end_date}}</a></td>

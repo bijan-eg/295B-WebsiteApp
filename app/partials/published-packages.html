@@ -8,6 +8,7 @@
 <br>
 <table class="table table-striped">
   <tr>
+    <th>Select</th>
     <th>ID</th>
     <th>Name</th>
     <th>Start Date</th>
@@ -15,7 +16,8 @@
     <th>Description</th>
   </tr>
   <tr ng-repeat="pkg in packages | filter:searchText" >
-		<td ng-if="pkg.status == 'published'"><a>{{pkg.id}}</td>
+		<td ng-if="pkg.status == 'reserved'"><input type="radio" ng-model="$parent.currentPackage" name="foo" value="{{pkg}}" id="{{pkg.id}}"></td>
+		<td ng-if="pkg.status == 'published'"><a>{{pkg.id}}</a></td>
 		<td ng-if="pkg.status == 'published'"><a>{{pkg.package_name}}</a></td>
 		<td ng-if="pkg.status == 'published'"><a>{{pkg.start_date}}</a></td>
 		<td ng-if="pkg.status == 'published'"><a>{{pkg.end_date}}</a></td>

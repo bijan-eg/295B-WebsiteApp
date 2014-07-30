@@ -1,50 +1,29 @@
-hotel-searchResults.html
 <div>
-	<div class="col-sm-3 col-md-2 sidebar">
-			<h4>Hotel results for package: {{singlepackage.package_name}}</h4>
-			<br>
-			<h3>{{hotelResults.HotelListResponse.EanWsError.verboseMessage}}</h3>
-			<br>
-			<img src="http://media.expedia.com{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].thumbNailUrl}}" width="175" height="175">
-			<br>
-			<img src="{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].tripAdvisorRatingUrl}}">
-			<br>
-			<br>
-			<!--<a ng-href="#/created-packages/{{singlepackage.id}}/reserve/hotelSearch/{{hotelResults.HotelListResponse.HotelList.HotelSummary[0].hotelId}}/{{hotelResults.HotelListResponse.HotelList.HotelSummary[0].RoomRateDetailsList.RoomRateDetails.roomTypeCode}}/{{hotelResults.HotelListResponse.HotelList.HotelSummary[0].RoomRateDetailsList.RoomRateDetails.rateCode}}/{{hotelResults.HotelListResponse.HotelList.HotelSummary[0].RoomRateDetailsList.RoomRateDetails.RateInfos.RateInfo.ChargeableRateInfo['@total']}}/hotelBook"><button class="btn btn-primary">Book this Hotel</button></a>-->
-			<button class="btn btn-primary" ng-click="bookSelectedHotel('bookHotel')">Book</button>
-			<br>
-	</div>
-	<div class="col-sm-9 main">
-			<div ng-repeat="hotel in hotelResults">
-				<h4>Hotel ID:</h4>
-				{{hotelResults.HotelListResponse.HotelList.HotelSummary[0].hotelId}}
-				<br>
-				<h4>Hotel Rating:</h4>
-				{{hotelResults.HotelListResponse.HotelList.HotelSummary[0].hotelRating}}
-				<br>
-				<h4>Hotel Name:</h4>
-				{{hotelResults.HotelListResponse.HotelList.HotelSummary[0].name}}
-				<br>
-				<h4>Hotel Address:</h4>
-				{{hotelResults.HotelListResponse.HotelList.HotelSummary[0].address1}}, {{hotelResults.HotelListResponse.HotelList.HotelSummary[1].city}}, {{hotelResults.HotelListResponse.HotelList.HotelSummary[1].stateProvinceCode}} {{hotelResults.HotelListResponse.HotelList.HotelSummary[1].postalCode}}
-				<br>
-				<h4>lat: </h4>{{hotelResults.HotelListResponse.HotelList.HotelSummary[0].latitude}}
-				<br>
-				<h4>long: </h4>{{hotelResults.HotelListResponse.HotelList.HotelSummary[0].longitude}}
-				<br>
-				<h4>Hotel TripAdvisor link: </h4>
-				<a href="{{hotelResults.HotelListResponse.HotelList.HotelSummary[0].deepLink}}">TravelNow</a>
-				<br>
-				 supplierType: {{hotelResults.HotelListResponse.HotelList.HotelSummary[0].supplierType}}
-				 <br>
-				 roomTypeCode: {{hotelResults.HotelListResponse.HotelList.HotelSummary[0].RoomRateDetailsList.RoomRateDetails.roomTypeCode}}
-				 <br>
-				 rateCode: {{hotelResults.HotelListResponse.HotelList.HotelSummary[0].RoomRateDetailsList.RoomRateDetails.rateCode}}
-				 <br>
-				 chargeableRate: {{hotelResults.HotelListResponse.HotelList.HotelSummary[0].RoomRateDetailsList.RoomRateDetails.RateInfos.RateInfo.ChargeableRateInfo['@total']}}
-				 <br>
-				 {{bookHotel}}
-				 book results: {{bookHotel.HotelRoomReservationResponse.EanWsError.verboseMessage}} 
-			</div>
-	</div>
+	<strong><label for="submitDebugArea"> Submit result:</label></strong> <br />
+	<textarea id="submitDebugArea">{{hotelResults | json}} </textarea>
+	<br>
+	<h3>{{hotelResults.HotelListResponse.EanWsError.verboseMessage}}</h3>
+	<br>
+	<img src="http://media.expedia.com+{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].thumbNailUrl}}">
+	<img src="{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].tripAdvisorRatingUrl}}">
+	<br>
+	<h4>Hotel ID:</h4>
+	{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].hotelId}}
+	<br>
+	<h4>Hotel Rating:</h4>
+	{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].hotelRating}}
+	<br>
+	<h4>Hotel Name:</h4>
+	{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].name}}
+	<br>
+	<h4>Hotel Address:</h4>
+	{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].address1}}, {{hotelResults.HotelListResponse.HotelList.HotelSummary[1].city}}, {{hotelResults.HotelListResponse.HotelList.HotelSummary[1].stateProvinceCode}} {{hotelResults.HotelListResponse.HotelList.HotelSummary[1].postalCode}}
+	<br>
+	<h4>lat: </h4>{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].latitude}}
+	<br>
+	<h4>long: </h4>{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].longitude}}
+	<br>
+	<h4>Hotel TripAdvisor link: </h4>
+	<a href="{{hotelResults.HotelListResponse.HotelList.HotelSummary[1].deepLink}}"</a>
+	<br>
 </div>
