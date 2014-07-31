@@ -45,12 +45,14 @@ angular.module('travelApp.services', [])
   
   .factory('JWTtoken', function($http){
    return {
-		getToken: function (callback) {
-			$http({
+		getToken: function () {
+			return $http({
 				method: 'POST',
 				url: 'http://mighty-lowlands-2957.herokuapp.com/api-token-auth/',
 				data: {"username":"bipul", "password":"cmpe295"}
-			}).success(callback);
+			}).success(function(result){
+				return result;
+			});
 		}
    };
   })
@@ -86,15 +88,17 @@ angular.module('travelApp.services', [])
 			"countryCode": "US", 
 			"postalCode": "98004"
 			};
-			var token = JWTtoken.getToken(function(Atoken){
-				return Atoken["token"];
+			JWTtoken.getToken().then(function(result){
+				var token = result.data.token;
+				$http({
+					url:"http://mighty-lowlands-2957.herokuapp.com/agentapp/hotel-reservation/",
+					method: "POST",
+					data: payload,
+					headers:{"Authorization":"JWT "+token}
+				}).success(callback);
+				//JWTtoken["token"]
 			});
-			$http({
-				url:"http://mighty-lowlands-2957.herokuapp.com/agentapp/hotel-reservation/",
-				method: "POST",
-				data: payload,
-				headers:{"Authorization":"JWT "+token}
-			}).error(callback);
+			
 		}
 	};
   })

@@ -112,7 +112,7 @@ angular.module('travelApp.controllers', [])
 	
   .controller('HotelBookController', ['$scope', 'packages', 'JWTtoken', '$routeParams', '$http', 'sharedProperties', function($scope, packages, JWTtoken, $routeParams, $http, sharedProperties){
 		
-		packages.find($routeParams.pid, function(singlepackage) {
+		packages.find($routeParams.pid,  function(singlepackage) {
 			$scope.singlepackage = singlepackage;
 		});
 		
