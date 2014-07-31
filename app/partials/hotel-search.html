@@ -21,23 +21,10 @@
 		</div>
 		<br>
 		<div class="form-actions">
-			<a ng-href="#/created-packages/{{singlepackage.id}}/reserve/hotelSearch/searchResults/{{hotelCity}}/{{hotelState}}/{{startDate}}/{{endDate}}"> <button class="btn btn-primary">Search</button> </a>
+			<a ng-href="#/created-packages/{{singlepackage.id}}/reserve/hotelSearch/searchResults"> 
+				<button class="btn btn-primary" ng-click="searchHotel(hotelResults)" ng-disabled="hotelSearchForm.$invalid">Search</button> </a>
 			<!--<a ng-href="#/created-packages/{{singlepackage.id}}/reserve/hotelSearch/{{hotelCity}}/{{hotelState}}/{{startDate}}/{{endDate}}/searchResults"><button class="btn btn-primary" >Search</button></a> -->
-		<!-- ng-click="searchHotel(hotelResults)" ng-disabled="hotelSearchForm.$invalid"-->
 		</div>	
-<br>
-<!--			$(document).ready(
-			  /* This is the function that will get executed after the DOM is fully loaded *
-			  function () {
-				$( "#datepicker1" ).datepicker({
-				  changeMonth: true,//this option for allowing user to select month
-				  changeYear: true //this option for allowing user to select from year range
-				});
-				$( "#datepicker2" ).datepicker({
-				  changeMonth: true,//this option for allowing user to select month
-				  changeYear: true //this option for allowing user to select from year range
-				});
-			  }
-			);-->
 	</fieldset>
 </form>
+<pre>{{hotelResults}}</pre>

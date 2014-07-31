@@ -27,12 +27,10 @@
 
 		<br>
 			<br><div class="form-actions">
-				<!--ng-click="bookSelectedHotel(booking)   /{{singlepackage.id}}-->
-					<a ng-href="#/created-packages/reserve/hotelSearch/booked">
-						<button class="btn btn-primary" >Book Hotel</button>
-					</a>
+				<a ng-href="#/created-packages/{{singlepackage.id}}/reserve/hotelSearch/booked">
+					<button class="btn btn-primary" ng-click="bookSelectedHotel(booking)" >Book Hotel</button>
+				</a>
 			</div>
 		</fieldset>
 	</form>
 </div>
-{{booking}}

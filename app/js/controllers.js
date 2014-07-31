@@ -4,8 +4,8 @@ angular.module('travelApp.controllers', [])
 
   .controller('NewPackageController', ['$scope','$http', 'JWTtoken', function($scope, $http, JWTtoken) {
 	JWTtoken.getToken(function(JWTtoken) {
-		$scope.myToken = JWTtoken["token"];	
-	  });
+	$scope.myToken = JWTtoken["token"];	
+	});
 	$scope.createPackage = function(resultPackage) {
 		var payload = {
 		"package_name": $scope.package_name, 
@@ -23,7 +23,8 @@ angular.module('travelApp.controllers', [])
 		    url:"http://mighty-lowlands-2957.herokuapp.com/agentapp/packages/",
 			method: "POST",
 			data:payload,
-			headers:{"Authorization":"JWT "+$scope.myToken}
+			headers:{"Authorization":"JWT "+$scope.myToken
+					}
 		})
 		.success(function(data, status, headers, config) {
 			$scope[resultPackage] = data;
@@ -32,13 +33,6 @@ angular.module('travelApp.controllers', [])
 			$scope[resultPackage] = status; 
 		});
 	};
-  }])
-  
-  .controller('NewPackageCreatedController', ['$scope', 'packages', '$routeParams', function($scope, packages, $routeParams) {
-	  
-	packages.create($routeParams.pkgName, $routeParams.desc, $routeParams.newstartMonth+"/"+$routeParams.newstartDay+"/"+$routeParams.newstartYear, $routeParams.newendMonth+"/"+$routeParams.newendDay+"/"+$routeParams.newendYear, $scope.myToken, function(newPackage){
-		$scope.resultPackage = newPackage;
-	});
   }])
   
   .controller('CreatedPackagesController', ['$scope', 'packages', function($scope, packages) {
@@ -78,11 +72,12 @@ angular.module('travelApp.controllers', [])
 			})
 			.success(function(data, status, headers, config) {
 				$scope[removingpackage] = data;
+				$window.alert('Package Deleted!');
 			})
 			.error(function(data, status, headers, config) {
 				$scope[removingpackage] = status; 
+				$window.alert(data['detail']);
 			});
-			$window.alert('Package Deleted!');
 		}
 	}
   }])
@@ -90,68 +85,83 @@ angular.module('travelApp.controllers', [])
   .controller('ReservePackageController', ['$scope', function($scope) {  
   }])
   
-  .controller('SearchHotelsController', ['$scope', 'packages', '$routeParams', '$http',
-										function($scope, packages, $routeParams, $http){
+  .controller('SearchHotelsController', ['$scope','sharedProperties', 'packages', '$routeParams', 'hotels', 'JWTtoken', '$http',
+										function($scope,sharedProperties, packages, $routeParams, hotels, JWTtoken, $http){
 	
 	packages.find($routeParams.pid, function(singlepackage) {
 		$scope.singlepackage = singlepackage;
-	});	
+	});		
+	// initializing $scope variables with default values for faster testing purpose
+	sharedProperties.setHotelCity("Fresno");
+	sharedProperties.setHotelState("CA");
+	sharedProperties.setStartDate("10/10/2014");
+	sharedProperties.setEndDate("10/12/2014");
+	//sharedProperties.setPid($scope.singlepackage['id']);
+	$scope.searchHotel = function (item, event) {
+		sharedProperties.setHotelCity($scope.hotelCity);
+		sharedProperties.setHotelState($scope.hotelState);
+		sharedProperties.setStartDate($scope.startDate);
+		sharedProperties.setEndDate($scope.endDate);
+		};
   }])
   
-  .controller('SearchHotelsResultsController', ['$scope', 'packages', 'hotels', '$routeParams', function($scope, packages, hotels, $routeParams){
-		
-		packages.find($routeParams.pid, function(singlepackage) {
-			$scope.singlepackage = singlepackage;
-		});
-		
-		hotels.search ($routeParams.hotelCity, $routeParams.hotelState, $routeParams.startMonth+"/"+$routeParams.startDay+"/"+$routeParams.startYear, $routeParams.endMonth+"/"+$routeParams.endDay+"/"+$routeParams.endYear, function(results){
+  .controller('HotelSearchResultsController', ['$scope','sharedProperties', 'packages', '$routeParams', 'hotels', 'JWTtoken', '$http',
+										function($scope,sharedProperties, packages, $routeParams, hotels, JWTtoken, $http){
+  	// "fresno", "CA", "10/10/2014", "10/12/2014"
+	packages.find($routeParams.pid, function(singlepackage) {
+		$scope.singlepackage = singlepackage;
+	});	
+	$scope.searchHotel = hotels.search (sharedProperties.getHotelCity(), sharedProperties.getHotelState(), sharedProperties.getStartDate(), sharedProperties.getEndDate(), function(results){
 			$scope.hotelResults = results;
 			console.log($scope.hotelResults);
 		});
-  }])
+	JWTtoken.getToken(function(JWTtoken) {
+		$scope.newToken = JWTtoken["token"];	
+	});	
 	
-  .controller('HotelBookController', ['$scope', 'packages', 'JWTtoken', '$routeParams', '$http', 'sharedProperties', function($scope, packages, JWTtoken, $routeParams, $http, sharedProperties){
-		
-		packages.find($routeParams.pid,  function(singlepackage) {
-			$scope.singlepackage = singlepackage;
-		});
-		
-		sharedProperties.sethotelId($routeParams.hid);
-		sharedProperties.setroomTypeCode($routeParams.roomTypeCode);
-		sharedProperties.setrateCode($routeParams.rateCode);
-		sharedProperties.setchargeableRate($routeParams.chargeableRate);		
-		
-		
-		/*$scope.bookSelectedHotel = function(booking) {
+	// default values are provided by Expedia EAN's for testing purpose.
+	$scope.startDate = sharedProperties.getStartDate();
+	$scope.endDate = sharedProperties.getEndDate();
+	
+	$scope.bookSelectedHotel = function(booking) {
+		 var payload = {
+		"hotelId": $scope.hotelResults.HotelListResponse.HotelList.HotelSummary[0].hotelId,
+		"arrivalDate": sharedProperties.getStartDate(),
+		"departureDate": sharedProperties.getEndDate(),
+		"supplierType": $scope.hotelResults.HotelListResponse.HotelList.HotelSummary[0].supplierType,
+		"roomTypeCode": $scope.hotelResults.HotelListResponse.HotelList.HotelSummary[0].RoomRateDetailsList.RoomRateDetails.roomTypeCode,
+		"rateCode": $scope.hotelResults.HotelListResponse.HotelList.HotelSummary[0].RoomRateDetailsList.RoomRateDetails.rateCode,
+		"chargeableRate": $scope.hotelResults.HotelListResponse.HotelList.HotelSummary[0].RoomRateDetailsList.RoomRateDetails.RateInfos.RateInfo.ChargeableRateInfo['@total'],
+		"room1": "2",
+		"room1FirstName": "test", 
+		"room1LastName": "tester", 
+		"room1BedTypeId": "23",
+		"room1SmokingPreferece": "NS",
+		"email": $scope.bookemail,
+		"firstName": "test", 
+		"lastName": "tester",
+		"city": "Seattle", 
+		"stateProvinceCode": "WA", 
+		"countryCode": "US", 
+		"postalCode": "98004"
+		};	
+		// "Content-Type": "application/json",
 		 $http({
 			url:"http://mighty-lowlands-2957.herokuapp.com/agentapp/hotel-reservation/",
 			method: "POST",
 			data: payload,
 			headers:{"Content-Type": "application/json","Authorization":"JWT "+$scope.newToken}
-		 })
-		 .success(function(data, status, headers, config) {
+		})
+		.success(function(data, status, headers, config) {
 			$scope.booking = data;
-		 })
-		 .error(function(data, status, headers, config) {
+		})
+		.error(function(data, status, headers, config) {
 			$scope.booking = status; 
-		 });
-		};*/
-  }])
-  .controller('HotelBookConfirmController', ['$scope', 'JWTtoken', 'packages', 'hotels',  'sharedProperties', function($scope, JWTtoken, packages, hotels, sharedProperties){
-		//$scope.newToken = {};
-		//JWTtoken.getToken(function(JWTtoken) {
-			// $scope.newToken = JWTtoken;
-			//sharedProperties.setToken(tokenTest);
-			//["token"]
-//		});			
-		
-		/*
-		payload.hotelId = ;
-		payload.roomTypeCode = ;
-		payload.rateCode = ;
-		payload.chargeableRate = ;*/
-		
-		hotels.book(sharedProperties.gethotelId(), sharedProperties.getroomTypeCode(), sharedProperties.getrateCode(), sharedProperties.getchargeableRate(),  function(booking){
-			$scope.booking = booking;
 		});
+	};
+  }])
+  
+  .controller('BookHotelsController', ['$scope','sharedProperties', 'packages', '$routeParams', 'hotels', 'JWTtoken', '$http',
+										function($scope,sharedProperties, packages, $routeParams, hotels, JWTtoken, $http){
+
   }])

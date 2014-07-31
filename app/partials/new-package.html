@@ -2,7 +2,7 @@
 <h4>The created package will be added to your "Created Packages" list which then can be Reserved.</h4>
 <div class="well tab-content">                        
 	<div class="tab-pane active" id="object-form">
-        <form  class="form-horizontal"  >
+        <form enctype="multipart/form-data"  class="form-horizontal" name="packageForm" >
 			<fieldset>
 				<div class="control-group" >
 					<label for="package_name" class="control-label">Package name:</label>
@@ -14,7 +14,7 @@
 				<div class="control-group">
 					<label for="description" class="control-label">Description:</label>
 					<div class="controls">
-						<input id="description" class="form-control"  type="text" ng-model="description">
+						<input id="description" class="form-control" name="description" type="text" ng-model="description">
 					</div>
 				</div>
 				<div class="control-group" >
@@ -25,7 +25,7 @@
 				<div class="control-group" >
 					<label for="endDate" class="control-label">End date:</label>
 					<div class="controls">
-						<input id='endDate' class="form-control" type="text" ng-model="end_date">
+						<input id='endDate' class="form-control" name="endDate" type="text" ng-model="end_date">
 					</div>
 					
 				</div>
@@ -33,32 +33,32 @@
 					<label class="control-label">Package type:</label>
 					<div class="radio">
 						<label>
-							<input type="radio" value="VC" ng-model="package_type" class="nfi">Vacation
+							<input type="radio" name="pkgType" value="VC" ng-model="package_type" class="nfi">Vacation
 						</label>
 					</div>
 					<div class="radio">
 						<label>
-							<input type="radio" value="HM" ng-model="package_type" class="nfi">Honeymoon
+							<input type="radio" name="pkgType" value="HM" ng-model="package_type" class="nfi">Honeymoon
 						</label>
 					</div>
 					<div class="radio">
 						<label>
-							<input type="radio"  value="ED" ng-model="package_type" class="nfi">Educational
+							<input type="radio" name="pkgType" value="ED" ng-model="package_type" class="nfi">Educational
 						</label>
 					</div>
 					<div class="radio">
 						<label>
-							<input type="radio"  value="AD" ng-model="package_type" class="nfi">Adventure
+							<input type="radio" name="pkgType" value="AD" ng-model="package_type" class="nfi">Adventure
 						</label>
 					</div>
 					<div class="radio">
 						<label>
-							<input type="radio" value="FM" ng-model="package_type" class="nfi">Family
+							<input type="radio" name="pkgType" value="FM" ng-model="package_type" class="nfi">Family
 						</label>
 					</div>
 					<div class="radio">
 						<label>
-							<input type="radio"  value="PL" ng-model="package_type" class="nfi">Pilgrimage
+							<input type="radio" name="pkgType" value="PL" ng-model="package_type" class="nfi">Pilgrimage
 						</label>
 					</div>
 				</div>
@@ -81,45 +81,45 @@
 					<div class="control-group ">
 						<label for="flight" class="control-label">Flight:</label>
 						<div class="controls">
-							<input id="flight" type="checkbox">
+							<input id="flight" name="flight" type="checkbox">
 						</div>
 					</div>
 					<div class="control-group ">
 						<label for="hotel" class="control-label">Hotel:</label>
 						<div class="controls">
-							<input id="hotel"  type="checkbox">
+							<input id="hotel" name="hotel" type="checkbox">
 						</div>
 					</div>
 					<div class="control-group ">
 						<label for="insurance" class="control-label">Insurance:</label>
 						<div class="controls">
-							<input id="insurance" type="checkbox">
+							<input id="insurance" name="insurance" type="checkbox">
 						</div>
 					</div>
 					<div class="control-group ">
 						<label for="restaurant" class="control-label">Restaurant:</label>
 						<div class="controls">
-							<input id="restaurant" type="checkbox">
+							<input id="restaurant" name="restaurant" type="checkbox">
 						</div>
 					</div>
 					<div class="control-group ">
 						<label for="local_booking" class="control-label">Local booking:</label>
 						<div class="controls">
-							<input id="local_booking"  type="checkbox">
+							<input id="local_booking" name="local_booking" type="checkbox">
 						</div>
 					</div>
 				</div>
 				<br>
 				<div class="form-actions">
-				<!--<a ng-href="#/new-package/{{package_name}}/{{description}}/{{start_date}}/{{end_date}}/{{package_type}}">-->
-					<button  ng-click="createPackage('submitResult')" class="btn btn-primary" >Create Package</button>
+					<button ng-click="createPackage('submitResult')" 
+					ng-disabled="packageForm.$invalid" class="btn btn-primary" title="create a new package" >Create Package</button>
 				</div>
 				<script type="text/javascript">
-					/*$('#startDate, #endDate').datepicker({
+					$('#startDate, #endDate').datepicker({
 						numberOfMonths: 2,
 						dateFormat: 'mm-dd-yy'
 					});
-					
+					/*
 					$(document).ready(
 				  // This is the function that will get executed after the DOM is fully loaded 
 				  function () {
