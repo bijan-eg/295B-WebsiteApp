@@ -1,10 +1,11 @@
 'use strict';
 /* Controllers */
 angular.module('travelApp.controllers', [])
+
   .controller('NewPackageController', ['$scope','$http', 'JWTtoken', function($scope, $http, JWTtoken) {
 	JWTtoken.getToken(function(JWTtoken) {
-	$scope.myToken = JWTtoken["token"];	
-	});
+		$scope.myToken = JWTtoken["token"];	
+	  });
 	$scope.createPackage = function(resultPackage) {
 		var payload = {
 		"package_name": $scope.package_name, 
@@ -18,7 +19,8 @@ angular.module('travelApp.controllers', [])
 		"restaurant": "false", 
 		"local_booking": "false", 
 		};	
-		 $http({ url:"http://mighty-lowlands-2957.herokuapp.com/agentapp/packages/",
+		 $http({
+		    url:"http://mighty-lowlands-2957.herokuapp.com/agentapp/packages/",
 			method: "POST",
 			data:payload,
 			headers:{"Authorization":"JWT "+$scope.myToken}
@@ -29,13 +31,22 @@ angular.module('travelApp.controllers', [])
 		.error(function(data, status, headers, config) {
 			$scope[resultPackage] = status; 
 		});
-	};		 
+	};
   }])
-  .controller('CreatedPackagesController', ['$scope', 'packages',  function($scope, packages) {
+  
+  .controller('NewPackageCreatedController', ['$scope', 'packages', '$routeParams', function($scope, packages, $routeParams) {
+	  
+	packages.create($routeParams.pkgName, $routeParams.desc, $routeParams.newstartMonth+"/"+$routeParams.newstartDay+"/"+$routeParams.newstartYear, $routeParams.newendMonth+"/"+$routeParams.newendDay+"/"+$routeParams.newendYear, $scope.myToken, function(newPackage){
+		$scope.resultPackage = newPackage;
+	});
+  }])
+  
+  .controller('CreatedPackagesController', ['$scope', 'packages', function($scope, packages) {
 	  packages.list(function(packages) {
 		  $scope.packages = packages;
 	  });
   }])
+  
   .controller('ReservedPackagesController', ['$scope', 'packages', function($scope, packages) {
 		packages.list(function(packages) {
 		  $scope.packages = packages;
@@ -43,40 +54,27 @@ angular.module('travelApp.controllers', [])
 	  $scope.Apackage={};
 	  $scope.currentPackage={};
   }])
+  
   .controller('PublishedPackagesController', ['$scope', 'packages', function($scope, packages) {
 		packages.list(function(packages) {
 		  $scope.packages = packages;
 	  });
   }])
-  .controller('PackageDetailController', ['$scope', '$routeParams', 'packages', '$http', 'JWTtoken', function($scope, $routeParams, packages, $http, JWTtoken) {
+  
+  .controller('PackageDetailController', ['$scope', '$routeParams', 'packages', '$http', 'JWTtoken', '$window', function($scope, $routeParams, packages, $http, JWTtoken, $window) {
 	packages.find($routeParams.pid, function(singlepackage) {
 		$scope.singlepackage = singlepackage;
 	});
+	
 	JWTtoken.getToken(function(JWTtoken) {
-	$scope.myToken = JWTtoken["token"];	
+	$scope.myTokenD = JWTtoken["token"];	
 	});
-	$scope.searchHotel = function(hotelResults) {
-		$http({
-			method: 'GET',
-			url: 'http://mighty-lowlands-2957.herokuapp.com/agentapp/hotels/?city='+$scope.hotelCity+'&state='+$scope.hotelState+'&startDate='+$scope.hotelStartDate+'&endDate='+$scope.hotelEndDate,
-			cache: true
-		})
-		.success(function(data, status, headers, config) {
-			$scope[hotelResults] = data;
-		})
-		.error(function(data, status, headers, config) {
-			$scope[hotelResults] = status; 
-		});
-	}
-	$scope.removePackage = function(id, removingpackage) {
-		//var deletePackage = $window.confirm('Are you sure you want to delete this package?');
-		//if (deletePackage) {
-			//packages.remove($routeParams.pid, function(removedPackage){
-				//$scope.removedpackage = removedPackage;
-			//});
-			$http({ url:'http://mighty-lowlands-2957.herokuapp.com/agentapp/packages/'+id,
+	$scope.removePackage = function(removingpackage) {
+		var deletePackage = $window.confirm('Are you sure you want to delete this package?');
+		if (deletePackage) {
+			$http({ url:'http://mighty-lowlands-2957.herokuapp.com/agentapp/packages/'+$routeParams.pid+'/',
 			method: "DELETE",
-			headers:{"Authorization":"JWT "+$scope.myToken}
+			headers:{"Authorization":"JWT "+$scope.myTokenD}
 			})
 			.success(function(data, status, headers, config) {
 				$scope[removingpackage] = data;
@@ -84,63 +82,76 @@ angular.module('travelApp.controllers', [])
 			.error(function(data, status, headers, config) {
 				$scope[removingpackage] = status; 
 			});
-			//$window.alert('Package Deleted!');
-		//}
+			$window.alert('Package Deleted!');
+		}
 	}
-	$scope.bookSelectedHotel = function(booking) {
-		 var payload = {
-		"hotelId": $scope.hotelResults.HotelListResponse.HotelList.HotelSummary[0].hotelId,
-		"arrivalDate": $scope.startDate,
-		"departureDate": $scope.endDate,
-		"supplierType": $scope.hotelResults.HotelListResponse.HotelList.HotelSummary[0].supplierType,
-		"roomTypeCode": $scope.hotelResults.HotelListResponse.HotelList.HotelSummary[0].RoomRateDetailsList.RoomRateDetails.roomTypeCode,
-		"rateCode": $scope.hotelResults.HotelListResponse.HotelList.HotelSummary[0].RoomRateDetailsList.RoomRateDetails.rateCode,
-		"chargeableRate": $scope.hotelResults.HotelListResponse.HotelList.HotelSummary[0].RoomRateDetailsList.RoomRateDetails.RateInfos.RateInfo.ChargeableRateInfo['@total'],
-		"room1": "2",
-		"room1FirstName": "test", 
-		"room1LastName": "tester", 
-		"room1BedTypeId": "23",
-		"room1SmokingPreferece": "NS",
-		"email": $scope.bookemail,
-		"firstName": "test", 
-		"lastName": "tester",
-		"city": "Seattle", 
-		"stateProvinceCode": "WA", 
-		"countryCode": "US", 
-		"postalCode": "98004"
-		};	
-		// "Content-Type": "application/json",
+  }])
+  
+  .controller('ReservePackageController', ['$scope', function($scope) {  
+  }])
+  
+  .controller('SearchHotelsController', ['$scope', 'packages', '$routeParams', '$http',
+										function($scope, packages, $routeParams, $http){
+	
+	packages.find($routeParams.pid, function(singlepackage) {
+		$scope.singlepackage = singlepackage;
+	});	
+  }])
+  
+  .controller('SearchHotelsResultsController', ['$scope', 'packages', 'hotels', '$routeParams', function($scope, packages, hotels, $routeParams){
+		
+		packages.find($routeParams.pid, function(singlepackage) {
+			$scope.singlepackage = singlepackage;
+		});
+		
+		hotels.search ($routeParams.hotelCity, $routeParams.hotelState, $routeParams.startMonth+"/"+$routeParams.startDay+"/"+$routeParams.startYear, $routeParams.endMonth+"/"+$routeParams.endDay+"/"+$routeParams.endYear, function(results){
+			$scope.hotelResults = results;
+			console.log($scope.hotelResults);
+		});
+  }])
+	
+  .controller('HotelBookController', ['$scope', 'packages', 'JWTtoken', '$routeParams', '$http', 'sharedProperties', function($scope, packages, JWTtoken, $routeParams, $http, sharedProperties){
+		
+		packages.find($routeParams.pid, function(singlepackage) {
+			$scope.singlepackage = singlepackage;
+		});
+		
+		sharedProperties.sethotelId($routeParams.hid);
+		sharedProperties.setroomTypeCode($routeParams.roomTypeCode);
+		sharedProperties.setrateCode($routeParams.rateCode);
+		sharedProperties.setchargeableRate($routeParams.chargeableRate);		
+		
+		
+		/*$scope.bookSelectedHotel = function(booking) {
 		 $http({
 			url:"http://mighty-lowlands-2957.herokuapp.com/agentapp/hotel-reservation/",
 			method: "POST",
 			data: payload,
-			headers:{"Content-Type": "application/json","Authorization":"JWT "+$scope.myToken}
-		})
-		.success(function(data, status, headers, config) {
+			headers:{"Content-Type": "application/json","Authorization":"JWT "+$scope.newToken}
+		 })
+		 .success(function(data, status, headers, config) {
 			$scope.booking = data;
-		})
-		.error(function(data, status, headers, config) {
-			$scope.booking = data; 
-		});
-	};
-	//hotels.search($scope.hotelCity, $scope.hotelState, $scope.hotelStartDate, $scope.hotelEndDate, function(hotels){
-	//	$scope.hotelResults = hotels;
-	//});
+		 })
+		 .error(function(data, status, headers, config) {
+			$scope.booking = status; 
+		 });
+		};*/
   }])
-  .controller('ReservePackageController', ['$scope', function($scope) {  
-  }])
-  .controller('SearchHotelsController', ['$scope', function($scope  ) {	
-	/*$scope.searchHotel = function(hotelResults) {
-		$http({
-			method: 'GET',
-			url: 'http://mighty-lowlands-2957.herokuapp.com/agentapp/hotels/?city='+$scope.hotelCity+'&state='+$scope.hotelState+'&startDate='+$scope.hotelStartDate+'&endDate='+$scope.hotelEndDate,
-			cache: true
-		})
-		.success(function(data, status, headers, config) {
-			$scope[hotelResults] = data;
-		})
-		.error(function(data, status, headers, config) {
-			$scope[hotelResults] = status; 
+  .controller('HotelBookConfirmController', ['$scope', 'JWTtoken', 'packages', 'hotels',  'sharedProperties', function($scope, JWTtoken, packages, hotels, sharedProperties){
+		//$scope.newToken = {};
+		//JWTtoken.getToken(function(JWTtoken) {
+			// $scope.newToken = JWTtoken;
+			//sharedProperties.setToken(tokenTest);
+			//["token"]
+//		});			
+		
+		/*
+		payload.hotelId = ;
+		payload.roomTypeCode = ;
+		payload.rateCode = ;
+		payload.chargeableRate = ;*/
+		
+		hotels.book(sharedProperties.gethotelId(), sharedProperties.getroomTypeCode(), sharedProperties.getrateCode(), sharedProperties.getchargeableRate(),  function(booking){
+			$scope.booking = booking;
 		});
-	}*/
   }])
