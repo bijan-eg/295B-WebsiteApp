@@ -90,14 +90,10 @@ angular.module('travelApp.controllers', [])
   .controller('ReservePackageController', ['$scope', function($scope) {  
   }])
   
-  .controller('SearchHotelsController', ['$scope', 'packages', '$routeParams', '$http', 'sharedProperties',
-										function($scope, packages, $routeParams, $http, sharedProperties){	
+  .controller('SearchHotelsController', ['$scope', 'packages', '$routeParams', function($scope, packages, $routeParams,){	
 	packages.find($routeParams.pid, function(singlepackage) {
 		$scope.singlepackage = singlepackage;
 	});
-	
-	
-	
   }])
   
   .controller('SearchHotelsResultsController', ['$scope', 'packages', 'hotels', '$routeParams', 'sharedProperties', function($scope, packages, hotels, $routeParams, sharedProperties){
@@ -114,7 +110,7 @@ angular.module('travelApp.controllers', [])
 		sharedProperties.setEndDate($routeParams.endMonth+"/"+$routeParams.endDay+"/"+$routeParams.endYear);
   }])
 	
-  .controller('HotelBookController', ['$scope', 'packages', 'JWTtoken', '$routeParams', '$http', 'sharedProperties', function($scope, packages, JWTtoken, $routeParams, $http, sharedProperties){
+  .controller('HotelBookController', ['$scope', 'packages', '$routeParams', 'sharedProperties', function($scope, packages, $routeParams, sharedProperties){
 		
 		packages.find($routeParams.pid,  function(singlepackage) {
 			$scope.singlepackage = singlepackage;
@@ -127,37 +123,8 @@ angular.module('travelApp.controllers', [])
 		$scope.saveEmail = function (item, event) {
 			sharedProperties.setEmail($scope.bookemail);
 		}
-		//sharedProperties.setEmail($scope.bookemail);
-		
-		
-		/*$scope.bookSelectedHotel = function(booking) {
-		 $http({
-			url:"http://mighty-lowlands-2957.herokuapp.com/agentapp/hotel-reservation/",
-			method: "POST",
-			data: payload,
-			headers:{"Content-Type": "application/json","Authorization":"JWT "+$scope.newToken}
-		 })
-		 .success(function(data, status, headers, config) {
-			$scope.booking = data;
-		 })
-		 .error(function(data, status, headers, config) {
-			$scope.booking = status; 
-		 });
-		};*/
   }])
-  .controller('HotelBookConfirmController', ['$scope', 'JWTtoken', 'packages', 'hotels',  'sharedProperties', function($scope, JWTtoken, packages, hotels, sharedProperties){
-		//$scope.newToken = {};
-		//JWTtoken.getToken(function(JWTtoken) {
-			// $scope.newToken = JWTtoken;
-			//sharedProperties.setToken(tokenTest);
-			//["token"]
-//		});			
-		
-		/*
-		payload.hotelId = ;
-		payload.roomTypeCode = ;
-		payload.rateCode = ;
-		payload.chargeableRate = ;*/
+  .controller('HotelBookConfirmController', ['$scope', 'hotels', 'sharedProperties', function($scope, hotels, sharedProperties){
 		
 		hotels.book(sharedProperties.gethotelId(), sharedProperties.getroomTypeCode(), sharedProperties.getrateCode(), sharedProperties.getchargeableRate(), sharedProperties.getStartDate(), sharedProperties.getEndDate(), sharedProperties.getEmail(), function(booking){
 			$scope.booking = booking;

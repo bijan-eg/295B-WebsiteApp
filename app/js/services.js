@@ -69,18 +69,18 @@ angular.module('travelApp.services', [])
 		book: function(hotelId, roomTypeCode, rateCode, chargeableRate, startDate, endDate, email, callback){
 			var payload = {
 			"hotelId": hotelId,//$scope.hotelResults.HotelListResponse.HotelList.HotelSummary[0].hotelId,
-			"arrivalDate": startDate,//"09/23/2014",//$scope.startDate,
-			"departureDate": endDate,//"09/25/2014",//$scope.endDate,
+			"arrivalDate": startDate,
+			"departureDate": endDate,
 			"supplierType": "E",//$routeParams.supplierType,//$scope.hotelResults.HotelListResponse.HotelList.HotelSummary[0].supplierType,
-			"roomTypeCode": roomTypeCode, //$scope.hotelResults.HotelListResponse.HotelList.HotelSummary[0].RoomRateDetailsList.RoomRateDetails.roomTypeCode,
-			"rateCode": rateCode,//$scope.hotelResults.HotelListResponse.HotelList.HotelSummary[0].RoomRateDetailsList.RoomRateDetails.rateCode,
+			"roomTypeCode": roomTypeCode,
+			"rateCode": rateCode,
 			"chargeableRate": chargeableRate,//$scope.hotelResults.HotelListResponse.HotelList.HotelSummary[0].RoomRateDetailsList.RoomRateDetails.RateInfos.RateInfo.ChargeableRateInfo['@total'],
 			"room1": "2",
 			"room1FirstName": "test", 
 			"room1LastName": "tester", 
 			"room1BedTypeId": "23",
 			"room1SmokingPreferece": "NS",
-			"email": email,//"bijan.eghtesadi@gmail.com",//$scope.bookemail,
+			"email": email,
 			"firstName": "test", 
 			"lastName": "tester",
 			"city": "Seattle", 
@@ -88,6 +88,7 @@ angular.module('travelApp.services', [])
 			"countryCode": "US", 
 			"postalCode": "98004"
 			};
+			
 			JWTtoken.getToken().then(function(result){
 				var token = result.data.token;
 				$http({
@@ -96,7 +97,6 @@ angular.module('travelApp.services', [])
 					data: payload,
 					headers:{"Authorization":"JWT "+token}
 				}).success(callback);
-				//JWTtoken["token"]
 			});
 			
 		}
@@ -104,7 +104,6 @@ angular.module('travelApp.services', [])
   })
   
   .factory('sharedProperties', function(){
-	//var property = {};
 	var hotelId = '';
 	var roomTypeCode = '';
 	var rateCode = '';
@@ -164,9 +163,4 @@ angular.module('travelApp.services', [])
 			}
         };
   })
-  
-//  .factory('searchResultsService', function(){
-	//return{
-		//show: funtion(callback){
-		
   .value('version', '0.1');
