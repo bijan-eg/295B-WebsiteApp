@@ -19,13 +19,13 @@
 				</div>
 				<div class="control-group" >
 					<label for="startDate" class="control-label">Start date:</label>
-					<input id='startDate' class="form-control"  type="text" ng-model="start_date">
+					<input id='datepicker1' class="form-control"  type="text" ng-model="start_date">
 					
 				</div>
 				<div class="control-group" >
 					<label for="endDate" class="control-label">End date:</label>
 					<div class="controls">
-						<input id='endDate' class="form-control" type="text" ng-model="end_date">
+						<input id='datepicker2' class="form-control" type="text" ng-model="end_date">
 					</div>
 					
 				</div>
@@ -62,19 +62,6 @@
 						</label>
 					</div>
 				</div>
-				<!--<div class="control-group ">
-					<label for="package_type" class="control-label">Package type:</label>
-					<div class="controls">
-						<select id="package_type" name="package_type" class="form-control">
-							<option value="VC" ng-model="formData.pkgType">Vacation</option>
-							<option value="HM" ng-model="formData.pkgType">Honeymoon</option>
-							<option value="ED" ng-model="formData.pkgType">Educational</option>
-							<option value="AD" ng-model="formData.pkgType">Adventure</option>
-							<option value="FM" ng-model="formData.pkgType">Family</option>
-							<option value="PL" ng-model="formData.pkgType">Pilgrimage</option>
-						</select>
-					</div>
-				</div>-->
 				<br>
 				<h4>Which of these services are included in the package?</h4>
 				<div class="borderline">
@@ -111,35 +98,24 @@
 				</div>
 				<br>
 				<div class="form-actions">
-				<!--<a ng-href="#/new-package/{{package_name}}/{{description}}/{{start_date}}/{{end_date}}/{{package_type}}">-->
-					<button  ng-click="createPackage('submitResult')" class="btn btn-primary" >Create Package</button>
+				<a href="#/created-packages"><button  ng-click="createPackage('submitResult')" class="btn btn-primary" >Create Package</button>
+				</a>
 				</div>
 				<script type="text/javascript">
-					/*$('#startDate, #endDate').datepicker({
-						numberOfMonths: 2,
-						dateFormat: 'mm-dd-yy'
-					});
-					
 					$(document).ready(
-				  // This is the function that will get executed after the DOM is fully loaded 
-				  function () {
-					$( "#datepicker1" ).datepicker({
-					  changeMonth: true,//this option for allowing user to select month
-					  changeYear: true //this option for allowing user to select from year range
-					});
-					$( "#datepicker2" ).datepicker({
-					  changeMonth: true,//this option for allowing user to select month
-					  changeYear: true //this option for allowing user to select from year range
-					});
-				  }
-				);
-				*/
+						function () {
+							$( "#datepicker1" ).datepicker({
+								changeMonth: true,//this option for allowing user to select month
+								changeYear: true //this option for allowing user to select from year range
+							});
+							$( "#datepicker2" ).datepicker({
+								  changeMonth: true,//this option for allowing user to select month
+								  changeYear: true //this option for allowing user to select from year range
+							});
+						}
+					);
 				</script>
 			</fieldset>
 		</form>
 	</div>              
 </div>
-<br>
-{{$scope.package_name}}
-<strong><label for="submitDebugArea"> Submit result:</label></strong> <br />
-<textarea id="submitDebugArea">{{submitResult | json}} </textarea>

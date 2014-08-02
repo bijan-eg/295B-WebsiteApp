@@ -68,19 +68,19 @@ angular.module('travelApp.services', [])
 		},
 		book: function(hotelId, roomTypeCode, rateCode, chargeableRate, startDate, endDate, email, callback){
 			var payload = {
-			"hotelId": hotelId,//$scope.hotelResults.HotelListResponse.HotelList.HotelSummary[0].hotelId,
-			"arrivalDate": startDate,//"09/23/2014",//$scope.startDate,
-			"departureDate": endDate,//"09/25/2014",//$scope.endDate,
-			"supplierType": "E",//$routeParams.supplierType,//$scope.hotelResults.HotelListResponse.HotelList.HotelSummary[0].supplierType,
-			"roomTypeCode": roomTypeCode, //$scope.hotelResults.HotelListResponse.HotelList.HotelSummary[0].RoomRateDetailsList.RoomRateDetails.roomTypeCode,
-			"rateCode": rateCode,//$scope.hotelResults.HotelListResponse.HotelList.HotelSummary[0].RoomRateDetailsList.RoomRateDetails.rateCode,
-			"chargeableRate": chargeableRate,//$scope.hotelResults.HotelListResponse.HotelList.HotelSummary[0].RoomRateDetailsList.RoomRateDetails.RateInfos.RateInfo.ChargeableRateInfo['@total'],
+			"hotelId": hotelId,
+			"arrivalDate": startDate,
+			"departureDate": endDate,
+			"supplierType": "E",
+			"roomTypeCode": roomTypeCode,
+			"rateCode": rateCode,
+			"chargeableRate": chargeableRate,
 			"room1": "2",
 			"room1FirstName": "test", 
 			"room1LastName": "tester", 
 			"room1BedTypeId": "23",
 			"room1SmokingPreferece": "NS",
-			"email": email,//"bijan.eghtesadi@gmail.com",//$scope.bookemail,
+			"email": email,
 			"firstName": "test", 
 			"lastName": "tester",
 			"city": "Seattle", 
@@ -96,7 +96,6 @@ angular.module('travelApp.services', [])
 					data: payload,
 					headers:{"Authorization":"JWT "+token}
 				}).success(callback);
-				//JWTtoken["token"]
 			});
 			
 		}
@@ -104,7 +103,12 @@ angular.module('travelApp.services', [])
   })
   
   .factory('sharedProperties', function(){
-	//var property = {};
+	var package_name = '';
+	var description ='';
+	var end_date = '';
+	var start_date = '';
+	var package_type = '';
+	//------------------------------
 	var hotelId = '';
 	var roomTypeCode = '';
 	var rateCode = '';
@@ -114,59 +118,85 @@ angular.module('travelApp.services', [])
 	var endDate = '';
 	var email = '';
         return {
-            gethotelId: function () {
-                return hotelId;
-            },
-			getroomTypeCode: function () {
-                return roomTypeCode;
-            },
-			getrateCode: function () {
-                return rateCode;
-            },
-			getchargeableRate: function () {
-                return chargeableRate;
-            },
-			getToken: function(){
-				return token;
+			
+			setPackage_type: function(value) {
+				package_type = value;
 			},
-			getStartDate: function(){
-				return startDate;
+			getPackage_type: function(){
+				return package_type;
 			},
-			getEndDate: function(){
-				return endDate;
+			setPackage_name: function(value) {
+				package_name = value;
 			},
-			getEmail: function(){
-				return email;
+			getPackage_name: function(){
+				return package_name;
 			},
-			sethotelId: function(value) {
+			setDescription: function(value) {
+				description = value;
+			},
+			getDescription: function(){
+				return description;
+			},
+			setEnd_date: function(value) {
+				end_date = value;
+			},
+			getEnd_date: function(){
+				return end_date;
+			},
+			setStart_date: function(value) {
+				start_date = value;
+			},
+			getStart_date: function (){
+				return start_date;
+			},
+			setHotelId: function(value) {
                 hotelId = value;
             },
-			setroomTypeCode: function(value) {
+            getHotelId: function () {
+                return hotelId;
+            },
+            setRoomTypeCode: function(value) {
                 roomTypeCode = value;
             },
-			setrateCode: function(value) {
+			getRoomTypeCode: function () {
+                return roomTypeCode;
+            },
+            setRateCode: function(value) {
                 rateCode = value;
             },
-            setchargeableRate: function(value) {
+			getRateCode: function () {
+                return rateCode;
+            },
+            setChargeableRate: function(value) {
                 chargeableRate = value;
             },
-			setToken: function(value){
+			getChargeableRate: function () {
+                return chargeableRate;
+            },
+            setToken: function(value){
 				token = value;
+			},
+			getToken: function(){
+				return token;
 			},
 			setStartDate: function(value){
 				startDate = value;
 			},
+			getStartDate: function(){
+				return startDate;
+			},
 			setEndDate: function(value){
 				endDate = value;
 			},
+			getEndDate: function(){
+				return endDate;
+			},
 			setEmail: function(value){
 				email = value;
-			}
+			},
+			getEmail: function(){
+				return email;
+			}		
         };
-  })
-  
-//  .factory('searchResultsService', function(){
-	//return{
-		//show: funtion(callback){
-		
+  })	
   .value('version', '0.1');

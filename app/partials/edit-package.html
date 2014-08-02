@@ -1,29 +1,12 @@
-<h4>Edit package info (like start and end date or type of package).</h4>
+<h4>Please edit these fields to update the package.</h4>
+<h4>The updated package will be added to your "Created Packages" list which then can be Reserved.</h4>
+<h4>Reserve services for the selected package here.</h4>
 <div>
-	Packages name: <b>{{singlepackagee.package_name}}</b>
+	Editing <b>{{editingPackage.package_name}}</b>
 </div>
-<br>
-<div>
-	Packages Description: <b>{{singlepackage.description}}</b>
-</div>
-<br>
-<div>
-	Packages Start Date: <b>{{singlepackage.start_date}}</b>
-</div>
-<br>
-<div>
-	Packages End Date: <b>{{singlepackage.end_date}}</b>
-</div>
-<br>
-<div>
-	Packages Type: <b>{{singlepackage.>package_type}}</b>
-</div>
-<br>
-You can add services to the package in the Reserve Package page.
-Please fill out any field and click Edit to edit the package info.
 <div class="well tab-content">                        
 	<div class="tab-pane active" id="object-form">
-        <form enctype="multipart/form-data"  class="form-horizontal" name="packageForm" >
+        <form  class="form-horizontal"  >
 			<fieldset>
 				<div class="control-group" >
 					<label for="package_name" class="control-label">Package name:</label>
@@ -35,78 +18,103 @@ Please fill out any field and click Edit to edit the package info.
 				<div class="control-group">
 					<label for="description" class="control-label">Description:</label>
 					<div class="controls">
-						<input id="description" class="form-control" name="description" type="text" ng-model="description">
+						<input id="description" class="form-control"  type="text" ng-model="description">
 					</div>
 				</div>
 				<div class="control-group" >
 					<label for="startDate" class="control-label">Start date:</label>
-					<input id='startDate' class="form-control"  type="text" ng-model="start_date">
+					<input id='datepicker1' class="form-control"  type="text" ng-model="start_date">
 					
 				</div>
 				<div class="control-group" >
 					<label for="endDate" class="control-label">End date:</label>
-					<div class="controls">
-						<input id='endDate' class="form-control" name="endDate" type="text" ng-model="end_date">
-					</div>
-					
+					<input id='datepicker2' class="form-control" type="text" ng-model="end_date">
 				</div>
 				<div class="form-group">
 					<label class="control-label">Package type:</label>
 					<div class="radio">
 						<label>
-							<input type="radio" name="pkgType" value="VC" ng-model="package_type" class="nfi">Vacation
+							<input type="radio" value="VC" ng-model="package_type" class="nfi">Vacation
 						</label>
 					</div>
 					<div class="radio">
 						<label>
-							<input type="radio" name="pkgType" value="HM" ng-model="package_type" class="nfi">Honeymoon
+							<input type="radio" value="HM" ng-model="package_type" class="nfi">Honeymoon
 						</label>
 					</div>
 					<div class="radio">
 						<label>
-							<input type="radio" name="pkgType" value="ED" ng-model="package_type" class="nfi">Educational
+							<input type="radio"  value="ED" ng-model="package_type" class="nfi">Educational
 						</label>
 					</div>
 					<div class="radio">
 						<label>
-							<input type="radio" name="pkgType" value="AD" ng-model="package_type" class="nfi">Adventure
+							<input type="radio"  value="AD" ng-model="package_type" class="nfi">Adventure
 						</label>
 					</div>
 					<div class="radio">
 						<label>
-							<input type="radio" name="pkgType" value="FM" ng-model="package_type" class="nfi">Family
+							<input type="radio" value="FM" ng-model="package_type" class="nfi">Family
 						</label>
 					</div>
 					<div class="radio">
 						<label>
-							<input type="radio" name="pkgType" value="PL" ng-model="package_type" class="nfi">Pilgrimage
+							<input type="radio"  value="PL" ng-model="package_type" class="nfi">Pilgrimage
 						</label>
 					</div>
 				</div>
 				<br>
+				<h4>Hotel is checked by default in this prototype version.</h4>
+				<div class="borderline">
+					<div class="control-group ">
+						<label for="flight" class="control-label">Flight:</label>
+						<div class="controls">
+							<input id="flight" type="checkbox" ng-model = "flight" ng-init="">
+						</div>
+					</div>
+					<div class="control-group ">
+						<label for="hotel" class="control-label">Hotel:</label>
+						<div class="controls">
+							<input id="hotel"  type="checkbox" ng-model = "hotel" ng-init="">
+						</div>
+					</div>
+					<div class="control-group ">
+						<label for="insurance" class="control-label">Insurance:</label>
+						<div class="controls">
+							<input id="insurance" type="checkbox" ng-model = "insurance" ng-init="">
+						</div>
+					</div>
+					<div class="control-group ">
+						<label for="restaurant" class="control-label">Restaurant:</label>
+						<div class="controls">
+							<input id="restaurant" type="checkbox" ng-model = "restaurant" ng-init="">
+						</div>
+					</div>
+					<div class="control-group ">
+						<label for="local_booking" class="control-label">Local booking:</label>
+						<div class="controls">
+							<input id="local_booking"  type="checkbox" ng-model = "local_booking" ng-init="">
+						</div>
+					</div>
+				</div>
+				<br>
 				<div class="form-actions">
-				<a href="#/created-packages"><button class="btn btn-primary" ng-click="editPackage('editResult')">Edit Package</button></a>
+						<button  ng-click="updatePackage('updateResult')" class="btn btn-primary" >Update Package</button>
+					
 				</div>
 				<script type="text/javascript">
-					$('#startDate, #endDate').datepicker({
-						numberOfMonths: 2,
-						dateFormat: 'mm-dd-yy'
-					});
-					/*
 					$(document).ready(
-				  // This is the function that will get executed after the DOM is fully loaded 
-				  function () {
-					$( "#datepicker1" ).datepicker({
-					  changeMonth: true,//this option for allowing user to select month
-					  changeYear: true //this option for allowing user to select from year range
-					});
-					$( "#datepicker2" ).datepicker({
-					  changeMonth: true,//this option for allowing user to select month
-					  changeYear: true //this option for allowing user to select from year range
-					});
-				  }
-				);
-				*/
+						function () {
+							$( "#datepicker1" ).datepicker({
+								changeMonth: true,//this option for allowing user to select month
+								changeYear: true //this option for allowing user to select from year range
+							});
+							$( "#datepicker2" ).datepicker({
+								  changeMonth: true,//this option for allowing user to select month
+								  changeYear: true //this option for allowing user to select from year range
+							});
+						}
+					);
 				</script>
 			</fieldset>
 		</form>

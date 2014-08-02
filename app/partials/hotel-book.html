@@ -1,19 +1,6 @@
-<!--
-<div>
-	<p>name: {{singlepackage.package_name}}</p>
-	<p>hotelId: {{hotelResults.HotelListResponse.HotelList.HotelSummary[0].hotelId}}</p>
-	<p>arrivalDate:{{startDate}}</p>
-	<p>departureDate:{{endDate}}</p> 
-	<p>supplierType: {{hotelResults.HotelListResponse.HotelList.HotelSummary[0].supplierType}} </p> 
-	<p>roomTypeCode: {{hotelResults.HotelListResponse.HotelList.HotelSummary[0].RoomRateDetailsList.RoomRateDetails.roomTypeCode}} </p> 
-	<p>rateCode: {{hotelResults.HotelListResponse.HotelList.HotelSummary[0].RoomRateDetailsList.RoomRateDetails.rateCode}} </p> 
-	<p>chargeableRate: {{hotelResults.HotelListResponse.HotelList.HotelSummary[0].RoomRateDetailsList.RoomRateDetails.RateInfos.RateInfo.ChargeableRateInfo['@total']}}</p>
-	<p>default value fom room1SmokingPreference: NS </p> 
-	<p>defualt value for room1BedTypeId: '23'</p>
-	<p>default value for room1: '2' </p>-->
-	
+
 <br>
-<div>	<p>packageId: {{singlepackage.id}}</p></div>
+<div>	<p><h4>Package Name: {{singlepackage.package_name}}</h4></p></div>
 <br>
 <div>
 	<form action="/agentapp/hotel-reservation/" method="POST" enctype="multipart/form-data" class="form-horizontal">
@@ -21,6 +8,8 @@
 		 
 		<div class="control-group ">
 			<label for="email" class="control-label">Send booking confirmation to this email:</label>
+			<br>
+			<br>
 			<div class="controls">
 				<input id="email" name="email" type="text" ng-model="bookemail">			
 			</div>
@@ -28,7 +17,6 @@
 
 		<br>
 			<br><div class="form-actions">
-				<!--ng-click="bookSelectedHotel(booking)   /{{singlepackage.id}}-->
 					<a ng-href="#/created-packages/reserve/hotelSearch/booked">
 						<button class="btn btn-primary" ng-click="saveEmail()">Book Hotel</button>
 					</a>

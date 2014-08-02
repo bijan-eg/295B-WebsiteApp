@@ -14,8 +14,8 @@
     <th>Description</th>
   </tr>
   <tr ng-repeat="pkg in packages | filter:searchText" >
-		<td ng-if="pkg.status == 'assigned'"><a>{{pkg.id}}</a></td>
-		<td ng-if="pkg.status == 'assigned'"><a>{{pkg.package_name}}</a></td>
+		<td ng-if="pkg.status == 'assigned'"><a ng-href="#/assigned-packages/{{pkg.id}}">{{pkg.id}}</a></td>
+		<td ng-if="pkg.status == 'assigned'"><a ng-href="#/assigned-packages/{{pkg.id}}">{{pkg.package_name}}</a></td>
 		<td ng-if="pkg.status == 'assigned'"><a>{{pkg.start_date}}</a></td>
 		<td ng-if="pkg.status == 'assigned'"><a>{{pkg.end_date}}</a></td>
 		<td ng-if="pkg.status == 'assigned'"><a>{{pkg.description}}</a></td>	  
