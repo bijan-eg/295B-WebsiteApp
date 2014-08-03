@@ -1,7 +1,7 @@
 'use strict';
 
 /* Services */
-// http://mighty-lowlands-2957.herokuapp.com
+// http://blooming-dusk-7345.herokuapp.com
 // http://127.0.0.1:9000/agentapp/packages/
 angular.module('travelApp.services', [])
   .factory('packages', function($http){
@@ -9,14 +9,14 @@ angular.module('travelApp.services', [])
 		list: function (callback) {
 			$http({
 				method: 'GET',
-				url: 'http://mighty-lowlands-2957.herokuapp.com/agentapp/packages/',
+				url: 'http://blooming-dusk-7345.herokuapp.com/agentapp/packages/',
 				cache: true
 			}).success(callback);
 		},
 		find: function (id, callback){
 			$http({
 				method: 'GET',
-				url: 'http://mighty-lowlands-2957.herokuapp.com/agentapp/packages/'+id,
+				url: 'http://blooming-dusk-7345.herokuapp.com/agentapp/packages/'+id,
 				cache: true
 			}).success(callback);
 		},
@@ -34,7 +34,7 @@ angular.module('travelApp.services', [])
 				"local_booking": "false", 
 			};	
 			$http({
-				url:"http://mighty-lowlands-2957.herokuapp.com/agentapp/packages/",
+				url:"http://blooming-dusk-7345.herokuapp.com/agentapp/packages/",
 				method: "POST",
 				data:payload,
 				headers:{"Authorization":"JWT "+token}
@@ -48,7 +48,7 @@ angular.module('travelApp.services', [])
 		getToken: function () {
 			return $http({
 				method: 'POST',
-				url: 'http://mighty-lowlands-2957.herokuapp.com/api-token-auth/',
+				url: 'http://blooming-dusk-7345.herokuapp.com/api-token-auth/',
 				data: {"username":"bipul", "password":"cmpe295"}
 			}).success(function(result){
 				return result;
@@ -62,7 +62,7 @@ angular.module('travelApp.services', [])
 		search: function(city, state, startDate, endDate, callback){
 			$http({
 				method: 'GET',
-				url: 'http://mighty-lowlands-2957.herokuapp.com/agentapp/hotels/?city='+city+'&state='+state+'&startDate='+startDate+'&endDate='+endDate,
+				url: 'http://blooming-dusk-7345.herokuapp.com/agentapp/hotels/?city='+city+'&state='+state+'&startDate='+startDate+'&endDate='+endDate,
 				cache: true
 			}).success(callback);
 		},
@@ -91,7 +91,7 @@ angular.module('travelApp.services', [])
 			JWTtoken.getToken().then(function(result){
 				var token = result.data.token;
 				$http({
-					url:"http://mighty-lowlands-2957.herokuapp.com/agentapp/hotel-reservation/",
+					url:"http://blooming-dusk-7345.herokuapp.com/agentapp/hotel-reservation/",
 					method: "POST",
 					data: payload,
 					headers:{"Authorization":"JWT "+token}

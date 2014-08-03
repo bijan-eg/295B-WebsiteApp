@@ -22,7 +22,7 @@ angular.module('travelApp.controllers', [])
 			"local_booking": "false", 
 			};	
 			 $http({
-				url:"http://mighty-lowlands-2957.herokuapp.com/agentapp/packages/",
+				url:"http://blooming-dusk-7345.herokuapp.com/agentapp/packages/",
 				method: "POST",
 				data:payload,
 				headers:{"Authorization":"JWT "+$scope.myToken}
@@ -76,7 +76,7 @@ angular.module('travelApp.controllers', [])
 	$scope.removePackage = function(removingpackage) {
 		var deletePackage = $window.confirm('Are you sure you want to delete this package?');
 		if (deletePackage) {
-			$http({ url:'http://mighty-lowlands-2957.herokuapp.com/agentapp/packages/'+$routeParams.pid+'/',
+			$http({ url:'http://blooming-dusk-7345.herokuapp.com/agentapp/packages/'+$routeParams.pid+'/',
 			method: "DELETE",
 			headers:{"Authorization":"JWT "+$scope.myTokenD}
 			})
@@ -122,7 +122,7 @@ angular.module('travelApp.controllers', [])
 			JWTtoken.getToken().then(function(result){
 				
 				var token = result.data.token;
-				$http({ url:'http://mighty-lowlands-2957.herokuapp.com/agentapp/packages/'+$routeParams.pid+'/',
+				$http({ url:'http://blooming-dusk-7345.herokuapp.com/agentapp/packages/'+$routeParams.pid+'/',
 				method: "PUT",
 				data:payload,
 				headers:{"Content-Type": "application/json", "Authorization":"JWT "+token}

@@ -1,0 +1,26 @@
+{
+	"engines": {
+    "node": "0.10.22"
+  },
+  "dependencies": {
+    "logfmt": "~0.17.0",
+    "express": "~3.4.6"
+  },
+  "name": "295B-WebsiteApp",
+  "version": "0.0.0",
+  "description": "295B-WebsiteApp\r ===============",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bijan-eg/295B-WebsiteApp.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bijan-eg/295B-WebsiteApp/issues"
+  },
+  "homepage": "https://github.com/bijan-eg/295B-WebsiteApp"
+}
