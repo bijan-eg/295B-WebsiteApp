@@ -14,6 +14,7 @@ config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/created-packages', {templateUrl: 'partials/created-packages.html', controller: 'CreatedPackagesController'});  
   $routeProvider.when('/reserved-packages', {templateUrl: 'partials/reserved-packages.html', controller: 'ReservedPackagesController'});
   $routeProvider.when('/published-packages', {templateUrl: 'partials/published-packages.html', controller: 'PublishedPackagesController'});
+  $routeProvider.when('/assigned-packages', {templateUrl: 'partials/assigned-packages.html', controller: 'AssignedPackagesController'});
   $routeProvider.when('/created-packages/:pid', {templateUrl: 'partials/package-detail.html', controller: 'PackageDetailController'});
   $routeProvider.when('/created-packages/:pid/edit', {templateUrl: 'partials/edit-package.html', controller: 'PackageEditController'});
   $routeProvider.when('/created-packages/:pid/reserve', {templateUrl: 'partials/reserve-package.html', controller: 'PackageDetailController'});  

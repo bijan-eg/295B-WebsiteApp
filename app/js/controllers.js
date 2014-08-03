@@ -39,13 +39,6 @@ angular.module('travelApp.controllers', [])
 	};
   }])
   
-  .controller('NewPackageCreatedController', ['$scope', 'packages', '$routeParams', function($scope, packages, $routeParams) {
-	  
-	packages.create($routeParams.pkgName, $routeParams.desc, $routeParams.newstartMonth+"/"+$routeParams.newstartDay+"/"+$routeParams.newstartYear, $routeParams.newendMonth+"/"+$routeParams.newendDay+"/"+$routeParams.newendYear, $scope.myToken, function(newPackage){
-		$scope.resultPackage = newPackage;
-	});
-  }])
-  
   .controller('CreatedPackagesController', ['$scope', 'packages', function($scope, packages) {
 	  packages.list(function(packages) {
 		  $scope.packages = packages;
@@ -61,6 +54,12 @@ angular.module('travelApp.controllers', [])
   }])
   
   .controller('PublishedPackagesController', ['$scope', 'packages', function($scope, packages) {
+		packages.list(function(packages) {
+		  $scope.packages = packages;
+	  });
+  }])
+  
+  .controller('AssignedPackagesController', ['$scope', 'packages', function($scope, packages) {
 		packages.list(function(packages) {
 		  $scope.packages = packages;
 	  });
